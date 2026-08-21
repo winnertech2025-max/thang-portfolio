@@ -51,6 +51,11 @@ type CopyContent = {
   }[];
   contactTitle: string;
   contactDescription: string;
+  companyTitle: string;
+  companyStatus: string;
+  companyTaxCode: string;
+  companyRepresentative: string;
+  companyLink: string;
   formName: string;
   formEmail: string;
   formMessage: string;
@@ -71,6 +76,15 @@ const profile = {
     "https://github.com/Thangdev02",
   ],
   facebook: "https://www.facebook.com/thang.quoc.94651774/",
+};
+
+const company = {
+  name: "CÔNG TY TNHH PHẦN MỀM WINNERTECH",
+  internationalName: "WINNERTECH SOFTWARE COMPANY LIMITED",
+  taxCode: "1702340986",
+  representative: "LÊ QUỐC THẮNG",
+  status: "Đang hoạt động",
+  url: "https://masothue.com/1702340986-cong-ty-tnhh-phan-mem-winnertech",
 };
 
 const copy = {
@@ -130,6 +144,11 @@ const copy = {
     contactTitle: "Cùng trao đổi về dự án tiếp theo.",
     contactDescription:
       "Gửi nhanh vài dòng, form sẽ mở email đã soạn sẵn tới địa chỉ của mình.",
+    companyTitle: "Pháp nhân hiện tại",
+    companyStatus: "Đang hoạt động",
+    companyTaxCode: "Mã số thuế",
+    companyRepresentative: "Người đại diện",
+    companyLink: "Xem thông tin công ty",
     formName: "Tên của bạn",
     formEmail: "Email",
     formMessage: "Nội dung",
@@ -194,6 +213,11 @@ const copy = {
     contactTitle: "Let us talk about the next project.",
     contactDescription:
       "Send a short message. The form opens a prepared email to my inbox.",
+    companyTitle: "Current legal entity",
+    companyStatus: "Active",
+    companyTaxCode: "Tax code",
+    companyRepresentative: "Representative",
+    companyLink: "View company profile",
     formName: "Your name",
     formEmail: "Email",
     formMessage: "Message",
@@ -698,6 +722,42 @@ export default function Home() {
               <a href={profile.facebook} target="_blank" rel="noreferrer" className="flex items-center gap-3 text-sm font-medium text-zinc-700 hover:text-sky-600 dark:text-zinc-200">
                 <UserRound className="size-5 text-sky-500" />
                 Facebook
+              </a>
+            </div>
+
+            <div className="mt-8 rounded-lg border border-zinc-200 bg-zinc-50 p-5 dark:border-white/10 dark:bg-white/[0.03]">
+              <div className="flex items-start gap-3">
+                <span className="grid size-10 shrink-0 place-items-center rounded-md bg-sky-100 text-sky-700 dark:bg-sky-400/10 dark:text-sky-200">
+                  <BriefcaseBusiness className="size-5" />
+                </span>
+                <div>
+                  <p className="text-sm font-semibold text-sky-700 dark:text-sky-300">{t.companyTitle}</p>
+                  <h3 className="mt-2 text-base font-semibold">{company.name}</h3>
+                  <p className="mt-1 text-sm text-zinc-500 dark:text-zinc-400">{company.internationalName}</p>
+                </div>
+              </div>
+              <div className="mt-5 grid gap-3 sm:grid-cols-3">
+                <div>
+                  <p className="text-xs font-semibold uppercase text-zinc-400">{t.companyTaxCode}</p>
+                  <p className="mt-1 text-sm font-semibold">{company.taxCode}</p>
+                </div>
+                <div>
+                  <p className="text-xs font-semibold uppercase text-zinc-400">{t.companyRepresentative}</p>
+                  <p className="mt-1 text-sm font-semibold">{company.representative}</p>
+                </div>
+                <div>
+                  <p className="text-xs font-semibold uppercase text-zinc-400">Status</p>
+                  <p className="mt-1 text-sm font-semibold">{locale === "vi" ? company.status : t.companyStatus}</p>
+                </div>
+              </div>
+              <a
+                href={company.url}
+                target="_blank"
+                rel="noreferrer"
+                className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-sky-700 hover:text-sky-500 dark:text-sky-300"
+              >
+                {t.companyLink}
+                <ExternalLink className="size-4" />
               </a>
             </div>
           </div>
