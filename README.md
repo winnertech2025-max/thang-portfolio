@@ -1,36 +1,85 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Portfolio - Lê Quốc Thắng
 
-## Getting Started
+Portfolio cá nhân được xây bằng Next.js, TypeScript và Tailwind CSS.
 
-First, run the development server:
+## Chạy local
 
 ```bash
+npm install
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Mặc định Next.js chạy ở `http://localhost:3000`. Trong phiên hiện tại mình đang chạy ở `http://localhost:3001`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Chỉnh nội dung
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- Nội dung chính, kỹ năng, dự án và thông tin liên hệ nằm trong `src/app/page.tsx`.
+- Metadata SEO nằm trong `src/app/layout.tsx`.
+- Style global nằm trong `src/app/globals.css`.
 
-## Learn More
+## Ảnh đại diện
 
-To learn more about Next.js, take a look at the following resources:
+Thêm ảnh của bạn vào:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```text
+public/avatar.jpg
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Nếu chưa có ảnh, trang sẽ tự hiển thị fallback chữ `LT`.
 
-## Deploy on Vercel
+## Ảnh bill chuyển khoản
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+Thêm 13 ảnh bill vào thư mục `public` theo đúng tên:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```text
+public/bill1.jpg
+public/bill2.jpg
+...
+public/bill13.jpg
+```
+
+Trang sẽ tự hiển thị đủ 13 bill trong mục `Check bill chuyển khoản`.
+
+## Ảnh dự án
+
+Thêm screenshot dự án vào `public/projects` theo các tên sau:
+
+```text
+public/projects/lam-media.jpg
+public/projects/naila.jpg
+public/projects/deluna-studio.jpg
+public/projects/bloxmart.jpg
+public/projects/vietnam-tour.jpg
+public/projects/study-sync.jpg
+public/projects/fleurea.jpg
+public/projects/hangout.jpg
+public/projects/ohbau.jpg
+public/projects/sportm.jpg
+```
+
+Nếu thiếu ảnh nào, project card đó sẽ tự hiện nền fallback.
+
+## Kiểm tra trước khi deploy
+
+```bash
+npm run lint
+npm run build
+```
+
+## Deploy Vercel
+
+1. Push project lên GitHub.
+2. Vào Vercel, chọn `Add New Project`.
+3. Import repository này.
+4. Framework preset để `Next.js`.
+5. Build command giữ mặc định:
+
+```bash
+npm run build
+```
+
+Sau khi có domain Vercel thật, cập nhật domain trong:
+
+- `src/app/layout.tsx`
+- `src/app/sitemap.ts`
+- `src/app/robots.ts`
