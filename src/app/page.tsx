@@ -43,6 +43,12 @@ type CopyContent = {
   viewBill: string;
   experienceTitle: string;
   experienceBody: string;
+  processTitle: string;
+  processIntro: string;
+  processSteps: {
+    title: string;
+    description: string;
+  }[];
   contactTitle: string;
   contactDescription: string;
   formName: string;
@@ -96,6 +102,31 @@ const copy = {
     experienceTitle: "Kinh nghiệm",
     experienceBody:
       "3 năm lập trình sản phẩm với React, Next.js, Node.js, Supabase, SQL, mobile app và các workflow tích hợp thực tế.",
+    processTitle: "Quy trình làm việc",
+    processIntro:
+      "Mình giữ quy trình rõ từ đầu để hai bên dễ theo dõi tiến độ, chi phí và phạm vi bàn giao.",
+    processSteps: [
+      {
+        title: "Trao đổi yêu cầu và báo giá",
+        description:
+          "Khách gửi yêu cầu, phạm vi mong muốn và deadline. Mình xem kỹ nhu cầu, tư vấn hướng làm phù hợp rồi gửi báo giá.",
+      },
+      {
+        title: "Chốt hợp tác",
+        description:
+          "Khi khách đồng ý triển khai, mình gửi hợp đồng và CCCD để hai bên có thông tin rõ ràng trước khi bắt đầu.",
+      },
+      {
+        title: "Demo hoặc MVP",
+        description:
+          "Mình làm bản demo/MVP trước. Nếu khách hài lòng với hướng đi này, khách đặt cọc để mình mua hạ tầng và tiếp tục triển khai.",
+      },
+      {
+        title: "Hoàn thiện và bàn giao",
+        description:
+          "Mình làm nốt phần còn lại, kiểm tra, bàn giao source/tài khoản/tài liệu cần thiết và khách thanh toán phần còn lại.",
+      },
+    ],
     contactTitle: "Cùng trao đổi về dự án tiếp theo.",
     contactDescription:
       "Gửi nhanh vài dòng, form sẽ mở email đã soạn sẵn tới địa chỉ của mình.",
@@ -135,6 +166,31 @@ const copy = {
     experienceTitle: "Experience",
     experienceBody:
       "3 years developing products with React, Next.js, Node.js, Supabase, SQL, mobile apps, and practical integration workflows.",
+    processTitle: "Working process",
+    processIntro:
+      "I keep the workflow clear from the beginning so both sides can track scope, timeline, cost, and handover expectations.",
+    processSteps: [
+      {
+        title: "Requirements and quotation",
+        description:
+          "The client shares the requirements, expected scope, and deadline. I review the needs, suggest a practical direction, and send a quotation.",
+      },
+      {
+        title: "Agreement",
+        description:
+          "Once the client confirms, I send the contract and ID information so both sides have clear details before starting.",
+      },
+      {
+        title: "Demo or MVP",
+        description:
+          "I build a demo/MVP first. If the client is happy with that direction, the client sends a deposit so I can purchase infrastructure and continue development.",
+      },
+      {
+        title: "Completion and handover",
+        description:
+          "I finish the remaining scope, test the product, hand over source/accounts/docs as needed, and the client pays the remaining balance.",
+      },
+    ],
     contactTitle: "Let us talk about the next project.",
     contactDescription:
       "Send a short message. The form opens a prepared email to my inbox.",
@@ -588,6 +644,32 @@ export default function Home() {
                   </div>
                 ))}
               </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="border-b border-zinc-200 bg-zinc-50 py-20 dark:border-white/10 dark:bg-white/[0.03]">
+          <div className="mx-auto grid w-full max-w-7xl gap-10 px-4 sm:px-6 lg:grid-cols-[0.75fr_1.25fr] lg:px-8">
+            <div>
+              <p className="text-sm font-semibold uppercase text-sky-600 dark:text-sky-300">Process</p>
+              <h2 className="mt-3 text-3xl font-semibold tracking-normal">{t.processTitle}</h2>
+              <p className="mt-4 text-base leading-8 text-zinc-600 dark:text-zinc-300">{t.processIntro}</p>
+            </div>
+            <div className="grid gap-4 sm:grid-cols-2">
+              {t.processSteps.map((step, index) => (
+                <article
+                  key={step.title}
+                  className="animate-fade-up rounded-lg border border-zinc-200 bg-white p-5 hover:-translate-y-1 hover:shadow-lg hover:shadow-zinc-200/70 dark:border-white/10 dark:bg-zinc-950 dark:hover:shadow-black/20"
+                >
+                  <div className="flex items-center gap-3">
+                    <span className="grid size-9 place-items-center rounded-md bg-sky-600 text-sm font-semibold text-white">
+                      {String(index + 1).padStart(2, "0")}
+                    </span>
+                    <h3 className="text-base font-semibold">{step.title}</h3>
+                  </div>
+                  <p className="mt-4 text-sm leading-7 text-zinc-600 dark:text-zinc-300">{step.description}</p>
+                </article>
+              ))}
             </div>
           </div>
         </section>
