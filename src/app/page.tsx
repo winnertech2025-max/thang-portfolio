@@ -96,7 +96,7 @@ const copy = {
       "Đây là các dự án gần nhất mình muốn giới thiệu. Trước đó mình còn tham gia hơn 10-20 dự án khác, nhưng danh sách khá dài nên mình chỉ chọn những sản phẩm tiêu biểu để đưa lên portfolio.",
     billsTitle: "Check bill chuyển khoản",
     billsIntro:
-      "Khu vực lưu và đối chiếu các bill chuyển khoản đã nhận. Ảnh được đọc từ thư mục public với tên bill1.jpg đến bill13.jpg.",
+      "Khu vực lưu và đối chiếu các bill chuyển khoản đã nhận. Một số bill có thể chuyển đến số tài khoản khác vì thời điểm đó mình chưa tự mở công ty.",
     billsNote: "Thêm ảnh vào public/bill1.jpg ... public/bill13.jpg để hiển thị đầy đủ.",
     viewBill: "Xem bill",
     experienceTitle: "Kinh nghiệm",
@@ -160,7 +160,7 @@ const copy = {
       "These are the most recent projects I want to highlight. I have worked on 10-20+ other projects before, but the full list is quite long, so this portfolio focuses on representative products.",
     billsTitle: "Bank transfer bill check",
     billsIntro:
-      "A simple place to store and review received transfer receipts. Images are loaded from public as bill1.jpg through bill13.jpg.",
+      "A simple place to store and review received transfer receipts. Some receipts may show a different bank account because I had not opened my own company at that time.",
     billsNote: "Add images to public/bill1.jpg ... public/bill13.jpg to display all receipts.",
     viewBill: "View bill",
     experienceTitle: "Experience",
@@ -617,6 +617,7 @@ export default function Home() {
                   <p className="text-sm font-semibold uppercase text-sky-600 dark:text-sky-300">Payment proof</p>
                 </div>
                 <h2 className="mt-3 text-2xl font-semibold tracking-normal">{t.billsTitle}</h2>
+                <p className="mt-3 max-w-2xl text-sm leading-7 text-zinc-600 dark:text-zinc-300">{t.billsIntro}</p>
               </div>
              
             </div>
