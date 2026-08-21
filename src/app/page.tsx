@@ -87,7 +87,7 @@ const copy = {
     skillsTitle: "Kỹ năng",
     projectsTitle: "Dự án đã làm",
     projectsIntro:
-      "Một số website và ứng dụng mình từng tham gia phát triển, được trình bày như các case study ngắn để nhà tuyển dụng hoặc khách hàng nắm nhanh phạm vi công việc.",
+      "Đây là các dự án gần nhất mình muốn giới thiệu. Trước đó mình còn tham gia hơn 10-20 dự án khác, nhưng danh sách khá dài nên mình chỉ chọn những sản phẩm tiêu biểu để đưa lên portfolio.",
     billsTitle: "Check bill chuyển khoản",
     billsIntro:
       "Khu vực lưu và đối chiếu các bill chuyển khoản đã nhận. Ảnh được đọc từ thư mục public với tên bill1.jpg đến bill13.jpg.",
@@ -126,7 +126,7 @@ const copy = {
     skillsTitle: "Skills",
     projectsTitle: "Selected projects",
     projectsIntro:
-      "A selection of websites and apps I have worked on, presented as compact case studies so recruiters and clients can understand the scope quickly.",
+      "These are the most recent projects I want to highlight. I have worked on 10-20+ other projects before, but the full list is quite long, so this portfolio focuses on representative products.",
     billsTitle: "Bank transfer bill check",
     billsIntro:
       "A simple place to store and review received transfer receipts. Images are loaded from public as bill1.jpg through bill13.jpg.",
