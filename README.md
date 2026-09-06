@@ -45,16 +45,17 @@ Trang sẽ tự hiển thị đủ 13 bill trong mục `Check bill chuyển kho�
 Thêm screenshot dự án vào `public/projects` theo các tên sau:
 
 ```text
-public/projects/lam-media.jpg
-public/projects/naila.jpg
-public/projects/deluna-studio.jpg
-public/projects/bloxmart.jpg
-public/projects/vietnam-tour.jpg
-public/projects/study-sync.jpg
-public/projects/fleurea.jpg
-public/projects/hangout.jpg
-public/projects/ohbau.jpg
-public/projects/sportm.jpg
+public/projects/lam-media.png
+public/projects/naila.png
+public/projects/deluna-studio.png
+public/projects/bloxmart.png
+public/projects/banghe-maytrela.png
+public/projects/vietnam-tour.png
+public/projects/study-sync.png
+public/projects/fleurea.png
+public/projects/hangout.png
+public/projects/ohbau.png
+public/projects/sportm.png
 ```
 
 Nếu thiếu ảnh nào, project card đó sẽ tự hiện nền fallback.

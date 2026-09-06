@@ -98,7 +98,7 @@ const copy = {
     ctaContact: "Liên hệ",
     stats: [
       ["4+", "Năm kinh nghiệm"],
-      ["10+", "Dự án tiêu biểu"],
+      ["11+", "Dự án tiêu biểu"],
       ["Web + Mobile ", "Nền tảng triển khai"],
     ],
     aboutTitle: "Mình xây sản phẩm từ giao diện đến backend.",
@@ -167,7 +167,7 @@ const copy = {
     ctaContact: "Contact",
     stats: [
       ["4+", "Years experience"],
-      ["10", "Featured projects"],
+      ["11+", "Featured projects"],
       ["Web + Mobile", "Delivery platforms"],
     ],
     aboutTitle: "I build from interface to backend.",
@@ -291,6 +291,18 @@ const projects = [
       "An online Roblox shop focused on a fast, clear shopping experience.",
     stack: ["React", "Commerce UI", "Payments"],
     accent: "from-blue-600 to-violet-500",
+  },
+  {
+    name: "Bàn Ghế Mây Tre Lá",
+    type: "Furniture catalogue",
+    url: "https://www.banghemaytrela.com/vi",
+    image: "/projects/banghe-maytrela.png",
+    descriptionVi:
+      "Website giới thiệu và trưng bày sản phẩm nội thất mây tre đan với trải nghiệm xem danh mục rõ ràng.",
+    descriptionEn:
+      "A bamboo and rattan furniture website with a clear product catalogue and browsing experience.",
+    stack: ["Next.js", "Catalogue", "Responsive UI"],
+    accent: "from-lime-600 to-sky-500",
   },
   {
     name: "Vietnam Tour",
