@@ -21,7 +21,6 @@ import {
 import Image from "next/image";
 import { FormEvent, useMemo, useState } from "react";
 import { IntroScreen } from "@/components/IntroScreen";
-import { TextType } from "@/components/TextType";
 
 type Locale = "vi" | "en";
 type CopyContent = {
@@ -254,7 +253,7 @@ const projects = [
     descriptionEn:
       "A football tournament platform for schedules, scores, and live match updates.",
     stack: ["Next.js", "React", "Realtime UI"],
-    accent: "from-sky-500 to-cyan-400",
+    accent: "bg-[#02667a]",
   },
   {
     name: "NAILA",
@@ -266,7 +265,7 @@ const projects = [
     descriptionEn:
       "An online salon booking product supporting customer booking and service operations.",
     stack: ["React", "Booking Flow", "Supabase"],
-    accent: "from-zinc-800 to-blue-500",
+    accent: "bg-[#202c39]",
   },
   {
     name: "Deluna Studio",
@@ -278,7 +277,7 @@ const projects = [
     descriptionEn:
       "A personalized ecommerce store with product selection, customization, and checkout flow.",
     stack: ["Next.js", "Ecommerce", "Tailwind"],
-    accent: "from-rose-400 to-sky-500",
+    accent: "bg-[#b65f44]",
   },
   {
     name: "Blox Mart",
@@ -290,19 +289,19 @@ const projects = [
     descriptionEn:
       "An online Roblox shop focused on a fast, clear shopping experience.",
     stack: ["React", "Commerce UI", "Payments"],
-    accent: "from-blue-600 to-violet-500",
+    accent: "bg-[#324b8c]",
   },
   {
     name: "Bàn Ghế Mây Tre Lá",
     type: "Furniture catalogue",
     url: "https://www.banghemaytrela.com/vi",
-    image: "/projects/banghe-maytrela.png",
+    image: null,
     descriptionVi:
       "Website giới thiệu và trưng bày sản phẩm nội thất mây tre đan với trải nghiệm xem danh mục rõ ràng.",
     descriptionEn:
       "A bamboo and rattan furniture website with a clear product catalogue and browsing experience.",
     stack: ["Next.js", "Catalogue", "Responsive UI"],
-    accent: "from-lime-600 to-sky-500",
+    accent: "bg-[#55735d]",
   },
   {
     name: "Vietnam Tour",
@@ -314,7 +313,7 @@ const projects = [
     descriptionEn:
       "A Vietnam travel storytelling website using immersive visuals and editorial content.",
     stack: ["Next.js", "Responsive UI", "Vercel"],
-    accent: "from-emerald-500 to-sky-500",
+    accent: "bg-[#16705f]",
   },
   {
     name: "Study Sync",
@@ -326,7 +325,7 @@ const projects = [
     descriptionEn:
       "A study partner and Pomodoro synchronization app for focused learning sessions.",
     stack: ["React", "Product UI", "Realtime"],
-    accent: "from-indigo-500 to-cyan-400",
+    accent: "bg-[#47516f]",
   },
   {
     name: "FLEUREA",
@@ -338,7 +337,7 @@ const projects = [
     descriptionEn:
       "A floral commerce site with product presentation and a polished gifting experience.",
     stack: ["Next.js", "Tailwind", "UI Design"],
-    accent: "from-pink-400 to-lime-400",
+    accent: "bg-[#9f5468]",
   },
   {
     name: "HangOut",
@@ -350,7 +349,7 @@ const projects = [
     descriptionEn:
       "A mobile app that recommends dining and entertainment places by mood, taste, and budget.",
     stack: ["Mobile", "React Native", "Recommendation"],
-    accent: "from-orange-400 to-sky-500",
+    accent: "bg-[#c16c3c]",
   },
   {
     name: "OhBau",
@@ -362,7 +361,7 @@ const projects = [
     descriptionEn:
       "A maternity shopping and pregnancy-support app for expecting mothers.",
     stack: ["Mobile", "Ecommerce", "Content"],
-    accent: "from-fuchsia-400 to-blue-500",
+    accent: "bg-[#9d5876]",
   },
   {
     name: "SportM",
@@ -374,7 +373,7 @@ const projects = [
     descriptionEn:
       "A sports venue booking platform with availability, groups, and quick match planning.",
     stack: ["Mobile", "Booking", "Business"],
-    accent: "from-green-500 to-blue-500",
+    accent: "bg-[#2d7557]",
   },
 ];
 
@@ -383,15 +382,13 @@ const bills = Array.from({ length: 13 }, (_, index) => ({
   src: `/bill${index + 1}.jpg`,
 }));
 
+const featuredProjects = projects.slice(0, 4);
+
 export default function Home() {
   const [locale, setLocale] = useState<Locale>("vi");
   const [dark, setDark] = useState(false);
   const [avatarMissing, setAvatarMissing] = useState(false);
   const t = copy[locale];
-
-  function toggleTheme() {
-    setDark(!dark);
-  }
 
   const navItems = useMemo(
     () => [
@@ -417,16 +414,18 @@ export default function Home() {
 
   return (
     <main className={dark ? "dark" : ""}>
-      <div className="surface-transition min-h-screen bg-white pb-24 text-zinc-950 dark:bg-zinc-950 dark:text-white md:pb-0">
+      <div className="surface-transition min-h-screen overflow-x-hidden bg-[#fbfaf6] text-[#181713] dark:bg-[#11110f] dark:text-[#f7f3e8]">
         <IntroScreen name={profile.displayName} />
 
-        <header className="sticky top-0 z-50 border-b border-zinc-200/80 bg-white/85 backdrop-blur-xl dark:border-white/10 dark:bg-zinc-950/80">
+        <header className="sticky top-0 z-50 border-b border-[#181713]/10 bg-[#fbfaf6]/90 backdrop-blur-2xl dark:border-white/10 dark:bg-[#11110f]/86">
           <div className="mx-auto flex h-16 w-full max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-            <a href="#" className="flex items-center gap-3" aria-label="Le Quoc Thang portfolio">
-              <span className="grid size-9 place-items-center rounded-lg bg-zinc-950 text-sm font-bold text-white dark:bg-white dark:text-zinc-950">
+            <a href="#" className="flex min-w-0 items-center gap-3" aria-label="Le Quoc Thang portfolio">
+              <span className="grid size-9 shrink-0 place-items-center rounded-[6px] bg-[#181713] text-sm font-bold text-[#fbfaf6] dark:bg-[#f7f3e8] dark:text-[#11110f]">
                 LT
               </span>
-              <span className="hidden text-sm font-semibold sm:block">{profile.displayName}</span>
+              <span className="hidden truncate text-sm font-semibold sm:block">
+                {profile.displayName}
+              </span>
             </a>
 
             <nav className="hidden items-center gap-1 md:flex">
@@ -434,7 +433,7 @@ export default function Home() {
                 <a
                   key={item.href}
                   href={item.href}
-                  className="rounded-md px-3 py-2 text-sm font-medium text-zinc-600 transition hover:bg-zinc-100 hover:text-zinc-950 dark:text-zinc-300 dark:hover:bg-white/10 dark:hover:text-white"
+                  className="rounded-[6px] px-3 py-2 text-sm font-medium text-[#5f5a4f] transition hover:bg-[#181713]/6 hover:text-[#181713] dark:text-[#c8c0af] dark:hover:bg-white/10 dark:hover:text-white"
                 >
                   {item.label}
                 </a>
@@ -445,7 +444,7 @@ export default function Home() {
               <button
                 type="button"
                 onClick={() => setLocale(locale === "vi" ? "en" : "vi")}
-                className="inline-flex h-10 items-center gap-2 rounded-md border border-zinc-200 px-3 text-sm font-semibold transition hover:bg-zinc-100 dark:border-white/15 dark:hover:bg-white/10"
+                className="inline-flex h-10 items-center gap-2 rounded-[6px] border border-[#181713]/12 bg-white/45 px-3 text-sm font-semibold transition hover:bg-white dark:border-white/15 dark:bg-white/5 dark:hover:bg-white/10"
                 aria-label="Switch language"
               >
                 <Globe2 className="size-4" />
@@ -453,8 +452,8 @@ export default function Home() {
               </button>
               <button
                 type="button"
-                onClick={toggleTheme}
-                className="grid size-10 place-items-center rounded-md border border-zinc-200 transition hover:bg-zinc-100 dark:border-white/15 dark:hover:bg-white/10"
+                onClick={() => setDark(!dark)}
+                className="grid size-10 place-items-center rounded-[6px] border border-[#181713]/12 bg-white/45 transition hover:bg-white dark:border-white/15 dark:bg-white/5 dark:hover:bg-white/10"
                 aria-label="Toggle theme"
               >
                 {dark ? <Sun className="size-4" /> : <Moon className="size-4" />}
@@ -463,81 +462,119 @@ export default function Home() {
           </div>
         </header>
 
-        <section className="relative overflow-hidden border-b border-zinc-200 dark:border-white/10">
-          <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-sky-400 to-transparent" />
-          <div className="mx-auto grid min-h-[calc(100vh-4rem)] w-full max-w-7xl items-center gap-12 px-4 py-12 sm:px-6 lg:grid-cols-[1.08fr_0.92fr] lg:px-8">
-            <div className="animate-fade-up max-w-3xl">
-              <div className="mb-6 inline-flex items-center rounded-md border border-zinc-200 bg-zinc-50 px-3 py-2 text-sm font-semibold text-zinc-700 dark:border-white/10 dark:bg-white/5 dark:text-zinc-200">
-                {t.badge}
+        <section className="relative overflow-hidden border-b border-[#181713]/10 dark:border-white/10">
+          <div className="mx-auto grid min-h-[calc(100svh-4rem)] w-full max-w-7xl gap-10 px-4 py-8 sm:px-6 lg:grid-cols-[0.96fr_1.04fr] lg:px-8">
+            <div className="flex min-w-0 flex-col justify-center py-8">
+              <div className="mb-7 flex flex-wrap items-center gap-3">
+                <span className="rounded-[6px] border border-[#00806f]/25 bg-[#00806f]/10 px-3 py-2 text-sm font-bold text-[#006c5e] dark:border-[#5ed5c2]/30 dark:bg-[#5ed5c2]/10 dark:text-[#86eadb]">
+                  {t.badge}
+                </span>
+                <span className="text-sm font-medium text-[#777064] dark:text-[#bbb2a1]">
+                  WinnerTech Software
+                </span>
               </div>
-              <h1 className="min-h-[11rem] text-4xl font-semibold leading-tight tracking-normal text-balance sm:min-h-[12.5rem] sm:text-5xl lg:min-h-[14rem] lg:text-5xl">
-                <TextType key={locale} text={t.heroTitle} typingSpeed={34} showCursor />
+
+              <h1 className="max-w-[12ch] break-words text-3xl font-semibold leading-[1.08] tracking-normal sm:max-w-4xl sm:text-6xl sm:leading-[1.03] lg:text-7xl">
+                {t.heroTitle}
               </h1>
-              <p className="mt-6 max-w-2xl text-base leading-8 text-zinc-600 sm:text-lg dark:text-zinc-300">
+
+              <p className="mt-7 max-w-[36ch] text-base leading-8 text-[#5f5a4f] sm:max-w-2xl sm:text-lg dark:text-[#d3cab8]">
                 {t.heroDescription}
               </p>
+
               <div className="mt-8 flex flex-col gap-3 sm:flex-row">
                 <a
                   href="#projects"
-                  className="inline-flex h-12 items-center justify-center gap-2 rounded-md bg-zinc-950 px-5 text-sm font-semibold text-white transition hover:bg-sky-700 dark:bg-white dark:text-zinc-950 dark:hover:bg-sky-100"
+                  className="inline-flex h-12 items-center justify-center gap-2 rounded-[6px] bg-[#181713] px-5 text-sm font-semibold text-[#fbfaf6] transition hover:bg-[#00806f] dark:bg-[#f7f3e8] dark:text-[#11110f] dark:hover:bg-[#86eadb]"
                 >
                   <BriefcaseBusiness className="size-4" />
                   {t.ctaWork}
                 </a>
                 <a
                   href="#contact"
-                  className="inline-flex h-12 items-center justify-center gap-2 rounded-md border border-zinc-300 px-5 text-sm font-semibold transition hover:bg-zinc-100 dark:border-white/20 dark:hover:bg-white/10"
+                  className="inline-flex h-12 items-center justify-center gap-2 rounded-[6px] border border-[#181713]/18 bg-white/45 px-5 text-sm font-semibold transition hover:bg-white dark:border-white/18 dark:bg-white/5 dark:hover:bg-white/10"
                 >
                   <Mail className="size-4" />
                   {t.ctaContact}
                 </a>
               </div>
-              <div className="mt-10 grid gap-4 sm:grid-cols-3">
+
+              <div className="mt-10 grid gap-3 sm:grid-cols-3">
                 {t.stats.map(([value, label]) => (
-                  <div key={label} className="border-l-2 border-sky-500 pl-4">
-                    <p className="text-2xl font-semibold">{value}</p>
-                    <p className="mt-1 text-sm text-zinc-500 dark:text-zinc-400">{label}</p>
+                  <div key={label} className="border-t border-[#181713]/12 pt-4 dark:border-white/12">
+                    <p className="text-3xl font-semibold tracking-normal">{value}</p>
+                    <p className="mt-1 text-sm leading-5 text-[#777064] dark:text-[#b8af9f]">{label}</p>
                   </div>
                 ))}
               </div>
             </div>
 
-            <div className="animate-soft-in delay-100 relative mx-auto w-full max-w-md">
-              <div className="aspect-[4/5] overflow-hidden rounded-lg border border-zinc-200 bg-zinc-100 shadow-2xl shadow-sky-950/10 dark:border-white/10 dark:bg-white/5">
-                {!avatarMissing ? (
-                  <Image
-                    src="/avatar.jpg"
-                    alt={profile.displayName}
-                    width={640}
-                    height={800}
-                    className="h-full w-full object-cover"
-                    onError={() => setAvatarMissing(true)}
-                    priority
-                  />
-                ) : (
-                  <div className="grid h-full place-items-center bg-[linear-gradient(135deg,#f8fafc,#dbeafe_50%,#18181b)] p-8 dark:bg-[linear-gradient(135deg,#09090b,#0f172a_55%,#38bdf8)]">
-                    <div className="text-center">
-                      <div className="mx-auto grid size-28 place-items-center rounded-lg bg-white text-4xl font-bold text-zinc-950 shadow-xl">
-                        LT
+            <div className="grid min-w-0 content-end gap-4 pb-7 lg:grid-cols-[0.78fr_1fr] lg:pt-10">
+              <div className="order-2 grid gap-4 lg:order-1">
+                <div className="rounded-[8px] border border-[#181713]/10 bg-white/62 p-4 shadow-[0_24px_70px_rgba(24,23,19,0.08)] dark:border-white/10 dark:bg-white/[0.055]">
+                  <p className="text-xs font-bold uppercase text-[#8b6d3a] dark:text-[#d7b776]">
+                    Current focus
+                  </p>
+                  <p className="mt-3 text-sm leading-6 text-[#514d44] dark:text-[#d8d0c0]">
+                    Product UI, realtime workflows, Supabase backends, mobile delivery.
+                  </p>
+                </div>
+                <div className="grid grid-cols-2 gap-3">
+                  {featuredProjects.map((project) => (
+                    <a
+                      key={project.name}
+                      href={project.url}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="group rounded-[8px] border border-[#181713]/10 bg-white/62 p-3 transition hover:-translate-y-1 hover:border-[#00806f]/40 dark:border-white/10 dark:bg-white/[0.055]"
+                    >
+                      <div className="relative aspect-[5/3] overflow-hidden rounded-[5px] bg-[#e9e4da] dark:bg-white/8">
+                        {project.image ? (
+                          <Image
+                            src={project.image}
+                            alt={`${project.name} screenshot`}
+                            fill
+                            sizes="(min-width: 1024px) 150px, 45vw"
+                            className="object-cover transition duration-500 group-hover:scale-105"
+                          />
+                        ) : (
+                          <ProjectFallback project={project} compact />
+                        )}
                       </div>
-                      <p className="mt-6 text-xl font-semibold text-white drop-shadow">
-                        {profile.displayName}
-                      </p>
-                      <p className="mt-2 text-sm font-medium text-sky-100 drop-shadow">
-                        {profile.title}
-                      </p>
-                    </div>
-                  </div>
-                )}
+                      <p className="mt-2 truncate text-xs font-bold">{project.name}</p>
+                    </a>
+                  ))}
+                </div>
               </div>
-              <div className="absolute -bottom-6 left-6 right-6 rounded-lg border border-zinc-200 bg-white p-4 shadow-xl dark:border-white/10 dark:bg-zinc-900">
-                <div className="flex items-start gap-3">
-                  <CheckCircle2 className="mt-1 size-5 text-sky-500" />
-                  <div>
-                    <p className="text-sm font-semibold">Available for full-stack work</p>
-                    <p className="mt-1 text-sm text-zinc-500 dark:text-zinc-400">
-                      React, Next.js, Node.js, Supabase, Mobile
-                    </p>
+
+              <div className="order-1 lg:order-2">
+                <div className="relative overflow-hidden rounded-[8px] border border-[#181713]/12 bg-[#e9e4da] shadow-[0_32px_90px_rgba(24,23,19,0.16)] dark:border-white/10 dark:bg-[#1b1a17]">
+                  <div className="relative aspect-[4/5]">
+                    {!avatarMissing ? (
+                      <Image
+                        src="/avatar.jpg"
+                        alt={profile.displayName}
+                        fill
+                        sizes="(min-width: 1024px) 42vw, 100vw"
+                        className="object-cover"
+                        onError={() => setAvatarMissing(true)}
+                        priority
+                      />
+                    ) : (
+                      <div className="grid h-full place-items-center bg-[#202c39] p-8 text-white">
+                        <div className="text-center">
+                          <div className="mx-auto grid size-28 place-items-center rounded-[8px] bg-white text-4xl font-bold text-[#181713] shadow-xl">
+                            LT
+                          </div>
+                          <p className="mt-6 text-xl font-semibold">{profile.displayName}</p>
+                          <p className="mt-2 text-sm font-medium text-white/70">{profile.title}</p>
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                  <div className="absolute inset-x-0 bottom-0 bg-[linear-gradient(to_top,rgba(0,0,0,0.72),transparent)] p-5 text-white">
+                    <p className="text-xl font-semibold">{profile.displayName}</p>
+                    <p className="mt-1 text-sm text-white/78">React / Next.js / Node.js / Supabase</p>
                   </div>
                 </div>
               </div>
@@ -545,93 +582,104 @@ export default function Home() {
           </div>
         </section>
 
-        <section id="about" className="animate-fade-up mx-auto grid w-full max-w-7xl gap-8 px-4 py-20 sm:px-6 lg:grid-cols-[0.7fr_1.3fr] lg:px-8">
+        <section id="about" className="mx-auto grid w-full max-w-7xl gap-8 px-4 py-18 sm:px-6 lg:grid-cols-[0.72fr_1.28fr] lg:px-8">
+          <SectionKicker label="About" />
           <div>
-            <p className="text-sm font-semibold uppercase text-sky-600 dark:text-sky-300">About</p>
-            <h2 className="mt-3 text-3xl font-semibold tracking-normal">{t.aboutTitle}</h2>
-          </div>
-          <div className="space-y-6 text-base leading-8 text-zinc-600 dark:text-zinc-300">
-            <p>{t.aboutBody}</p>
-            <div className="grid gap-4 sm:grid-cols-2">
+            <h2 className="max-w-3xl text-3xl font-semibold leading-tight tracking-normal sm:text-5xl">
+              {t.aboutTitle}
+            </h2>
+            <p className="mt-6 max-w-3xl text-base leading-8 text-[#5f5a4f] dark:text-[#d3cab8]">
+              {t.aboutBody}
+            </p>
+            <div className="mt-8 grid gap-3 sm:grid-cols-2">
               {[
                 "Product-minded development",
                 "Responsive, accessible UI",
                 "Backend & database integration",
                 "Production deployment workflow",
               ].map((item) => (
-                <div key={item} className="flex items-center gap-3">
-                  <CheckCircle2 className="size-5 shrink-0 text-sky-500" />
-                  <span>{item}</span>
+                <div key={item} className="flex min-h-14 items-center gap-3 border-t border-[#181713]/10 py-3 dark:border-white/10">
+                  <CheckCircle2 className="size-5 shrink-0 text-[#00806f] dark:text-[#72e0cf]" />
+                  <span className="text-sm font-semibold">{item}</span>
                 </div>
               ))}
             </div>
           </div>
         </section>
 
-        <section id="skills" className="border-y border-zinc-200 bg-zinc-50 py-20 dark:border-white/10 dark:bg-white/[0.03]">
-          <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="flex items-end justify-between gap-6">
-              <div>
-                <p className="text-sm font-semibold uppercase text-sky-600 dark:text-sky-300">Stack</p>
-                <h2 className="mt-3 text-3xl font-semibold tracking-normal">{t.skillsTitle}</h2>
+        <section id="skills" className="border-y border-[#181713]/10 bg-[#efeae0] py-18 dark:border-white/10 dark:bg-[#171613]">
+          <div className="mx-auto grid w-full max-w-7xl gap-8 px-4 sm:px-6 lg:grid-cols-[0.72fr_1.28fr] lg:px-8">
+            <SectionKicker label="Stack" />
+            <div>
+              <div className="flex items-end justify-between gap-6">
+                <h2 className="text-3xl font-semibold tracking-normal sm:text-5xl">{t.skillsTitle}</h2>
+                <Code2 className="hidden size-10 text-[#00806f] sm:block dark:text-[#72e0cf]" />
               </div>
-              <Code2 className="hidden size-10 text-sky-500 sm:block" />
-            </div>
-            <div className="mt-10 grid gap-5 md:grid-cols-3">
-              {skillGroups.map((group) => (
-                <div key={group.title} className="animate-fade-up rounded-lg border border-zinc-200 bg-white p-5 hover:-translate-y-1 hover:shadow-lg hover:shadow-zinc-200/70 dark:border-white/10 dark:bg-zinc-950 dark:hover:shadow-black/20">
-                  <h3 className="font-semibold">{group.title}</h3>
-                  <div className="mt-5 flex flex-wrap gap-2">
-                    {group.items.map((skill) => (
-                      <span
-                        key={skill}
-                        className="rounded-md border border-zinc-200 bg-zinc-50 px-3 py-2 text-sm font-medium text-zinc-700 dark:border-white/10 dark:bg-white/5 dark:text-zinc-200"
-                      >
-                        {skill}
-                      </span>
-                    ))}
+              <div className="mt-10 grid gap-4 md:grid-cols-3">
+                {skillGroups.map((group) => (
+                  <div key={group.title} className="rounded-[8px] border border-[#181713]/10 bg-[#fbfaf6] p-5 dark:border-white/10 dark:bg-white/[0.045]">
+                    <h3 className="font-semibold">{group.title}</h3>
+                    <div className="mt-5 flex flex-wrap gap-2">
+                      {group.items.map((skill) => (
+                        <span
+                          key={skill}
+                          className="rounded-[6px] border border-[#181713]/10 bg-white/65 px-3 py-2 text-sm font-medium text-[#514d44] dark:border-white/10 dark:bg-white/[0.06] dark:text-[#d8d0c0]"
+                        >
+                          {skill}
+                        </span>
+                      ))}
+                    </div>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
           </div>
         </section>
 
-        <section id="projects" className="mx-auto w-full max-w-7xl px-4 py-20 sm:px-6 lg:px-8">
-          <div className="max-w-3xl">
-            <p className="text-sm font-semibold uppercase text-sky-600 dark:text-sky-300">Work</p>
-            <h2 className="mt-3 text-3xl font-semibold tracking-normal">{t.projectsTitle}</h2>
-            <p className="mt-4 text-base leading-8 text-zinc-600 dark:text-zinc-300">{t.projectsIntro}</p>
+        <section id="projects" className="mx-auto w-full max-w-7xl px-4 py-18 sm:px-6 lg:px-8">
+          <div className="grid gap-8 lg:grid-cols-[0.72fr_1.28fr]">
+            <SectionKicker label="Work" />
+            <div>
+              <h2 className="text-3xl font-semibold tracking-normal sm:text-5xl">{t.projectsTitle}</h2>
+              <p className="mt-5 max-w-3xl text-base leading-8 text-[#5f5a4f] dark:text-[#d3cab8]">
+                {t.projectsIntro}
+              </p>
+            </div>
           </div>
-          <div className="mt-10 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
-            {projects.map((project) => (
+
+          <div className="mt-10 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+            {projects.map((project, index) => (
               <article
                 key={project.name}
-                className="animate-fade-up group overflow-hidden rounded-lg border border-zinc-200 bg-white transition hover:-translate-y-1 hover:shadow-xl hover:shadow-sky-950/10 dark:border-white/10 dark:bg-zinc-900"
+                className={`group rounded-[8px] border border-[#181713]/10 bg-white/70 p-3 shadow-[0_20px_60px_rgba(24,23,19,0.06)] transition hover:-translate-y-1 hover:border-[#00806f]/35 dark:border-white/10 dark:bg-white/[0.045] ${
+                  index === 0 ? "md:col-span-2 xl:col-span-2" : ""
+                }`}
               >
-                <ProjectCover project={project} />
-                <div className="p-4">
-                  <div className="mb-3 inline-flex rounded-md bg-sky-50 px-2.5 py-1 text-xs font-semibold text-sky-700 dark:bg-sky-400/10 dark:text-sky-200">
-                    {project.type}
-                  </div>
+                <ProjectCover project={project} featured={index === 0} />
+                <div className="px-1 pb-1 pt-4">
                   <div className="flex items-start justify-between gap-3">
-                    <h3 className="text-lg font-semibold">{project.name}</h3>
+                    <div className="min-w-0">
+                      <p className="text-xs font-bold uppercase text-[#8b6d3a] dark:text-[#d7b776]">
+                        {project.type}
+                      </p>
+                      <h3 className="mt-1 text-xl font-semibold tracking-normal">{project.name}</h3>
+                    </div>
                     <a
                       href={project.url}
                       target="_blank"
                       rel="noreferrer"
-                      className="grid size-8 shrink-0 place-items-center rounded-md border border-zinc-200 text-zinc-600 transition hover:border-sky-300 hover:text-sky-600 dark:border-white/10 dark:text-zinc-300"
+                      className="grid size-9 shrink-0 place-items-center rounded-[6px] border border-[#181713]/12 text-[#5f5a4f] transition hover:border-[#00806f]/40 hover:text-[#00806f] dark:border-white/12 dark:text-[#d8d0c0]"
                       aria-label={`${t.visit} ${project.name}`}
                     >
                       <ExternalLink className="size-4" />
                     </a>
                   </div>
-                  <p className="mt-2 min-h-16 text-sm leading-6 text-zinc-600 dark:text-zinc-300">
+                  <p className="mt-3 min-h-16 text-sm leading-6 text-[#5f5a4f] dark:text-[#d3cab8]">
                     {locale === "vi" ? project.descriptionVi : project.descriptionEn}
                   </p>
                   <div className="mt-4 flex flex-wrap gap-2">
                     {project.stack.map((item) => (
-                      <span key={item} className="rounded-md bg-zinc-100 px-2.5 py-1.5 text-xs font-semibold text-zinc-700 dark:bg-white/10 dark:text-zinc-200">
+                      <span key={item} className="rounded-[6px] bg-[#efeae0] px-2.5 py-1.5 text-xs font-semibold text-[#514d44] dark:bg-white/10 dark:text-[#d8d0c0]">
                         {item}
                       </span>
                     ))}
@@ -642,22 +690,21 @@ export default function Home() {
           </div>
         </section>
 
-        <section id="bills" className="border-y border-zinc-200 bg-zinc-50 py-14 dark:border-white/10 dark:bg-white/[0.03]">
+        <section id="bills" className="border-y border-[#181713]/10 bg-[#202c39] py-16 text-white dark:border-white/10">
           <div className="mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8">
-            <div className="flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
-              <div className="max-w-3xl">
-                <div className="flex items-center gap-2">
-                  <span className="grid size-8 place-items-center rounded-md bg-sky-100 text-sky-700 dark:bg-sky-400/10 dark:text-sky-200">
-                    <Images className="size-4" />
-                  </span>
-                  <p className="text-sm font-semibold uppercase text-sky-600 dark:text-sky-300">Payment proof</p>
-                </div>
-                <h2 className="mt-3 text-2xl font-semibold tracking-normal">{t.billsTitle}</h2>
-                <p className="mt-3 max-w-2xl text-sm leading-7 text-zinc-600 dark:text-zinc-300">{t.billsIntro}</p>
+            <div className="grid gap-8 lg:grid-cols-[0.72fr_1.28fr] lg:items-end">
+              <div className="flex items-center gap-3">
+                <span className="grid size-10 place-items-center rounded-[6px] bg-white/10 text-[#72e0cf]">
+                  <Images className="size-5" />
+                </span>
+                <SectionKicker label="Payment proof" inverted />
               </div>
-             
+              <div>
+                <h2 className="text-3xl font-semibold tracking-normal sm:text-5xl">{t.billsTitle}</h2>
+                <p className="mt-5 max-w-3xl text-sm leading-7 text-white/72">{t.billsIntro}</p>
+              </div>
             </div>
-            <div className="mt-8 grid grid-cols-3 gap-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 xl:grid-cols-[repeat(13,minmax(0,1fr))]">
+            <div className="mt-10 grid grid-cols-3 gap-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-8 xl:grid-cols-[repeat(13,minmax(0,1fr))]">
               {bills.map((bill) => (
                 <BillCard key={bill.id} bill={bill} viewLabel={t.viewBill} />
               ))}
@@ -665,108 +712,96 @@ export default function Home() {
           </div>
         </section>
 
-        <section className="border-y border-zinc-200 bg-white py-20 text-zinc-950 dark:border-white/10 dark:bg-zinc-950 dark:text-white">
-          <div className="mx-auto grid w-full max-w-7xl gap-8 px-4 sm:px-6 lg:grid-cols-[0.8fr_1.2fr] lg:px-8">
+        <section className="mx-auto grid w-full max-w-7xl gap-8 px-4 py-18 sm:px-6 lg:grid-cols-[0.72fr_1.28fr] lg:px-8">
+          <SectionKicker label="Experience" />
+          <div className="grid gap-6 lg:grid-cols-[1.1fr_0.9fr]">
             <div>
-              <p className="text-sm font-semibold uppercase text-sky-600 dark:text-sky-300">Experience</p>
-              <h2 className="mt-3 text-3xl font-semibold tracking-normal">{t.experienceTitle}</h2>
+              <h2 className="text-3xl font-semibold tracking-normal sm:text-5xl">{t.experienceTitle}</h2>
+              <p className="mt-5 text-lg leading-8 text-[#5f5a4f] dark:text-[#d3cab8]">{t.experienceBody}</p>
             </div>
-            <div className="rounded-lg border border-zinc-200 bg-zinc-50 p-6 dark:border-white/10 dark:bg-white/[0.04]">
-              <p className="text-lg leading-8 text-zinc-600 dark:text-zinc-200">{t.experienceBody}</p>
-              <div className="mt-6 grid gap-4 sm:grid-cols-3">
-                {["Frontend", "Backend", "Mobile"].map((item) => (
-                  <div key={item} className="rounded-md border border-zinc-200 bg-white p-4 dark:border-white/10 dark:bg-transparent">
-                    <p className="text-sm text-zinc-500 dark:text-zinc-400">{t.role}</p>
-                    <p className="mt-1 font-semibold">{item} Developer</p>
-                  </div>
+            <div className="grid gap-3 sm:grid-cols-3 lg:grid-cols-1">
+              {["Frontend", "Backend", "Mobile"].map((item) => (
+                <div key={item} className="rounded-[8px] border border-[#181713]/10 bg-white/62 p-4 dark:border-white/10 dark:bg-white/[0.045]">
+                  <p className="text-xs font-bold uppercase text-[#8b6d3a] dark:text-[#d7b776]">{t.role}</p>
+                  <p className="mt-1 font-semibold">{item} Developer</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="border-y border-[#181713]/10 bg-[#efeae0] py-18 dark:border-white/10 dark:bg-[#171613]">
+          <div className="mx-auto grid w-full max-w-7xl gap-8 px-4 sm:px-6 lg:grid-cols-[0.72fr_1.28fr] lg:px-8">
+            <SectionKicker label="Process" />
+            <div>
+              <h2 className="text-3xl font-semibold tracking-normal sm:text-5xl">{t.processTitle}</h2>
+              <p className="mt-5 max-w-3xl text-base leading-8 text-[#5f5a4f] dark:text-[#d3cab8]">
+                {t.processIntro}
+              </p>
+              <div className="mt-9 grid gap-4 sm:grid-cols-2">
+                {t.processSteps.map((step, index) => (
+                  <article
+                    key={step.title}
+                    className="rounded-[8px] border border-[#181713]/10 bg-[#fbfaf6] p-5 dark:border-white/10 dark:bg-white/[0.045]"
+                  >
+                    <div className="flex items-center gap-3">
+                      <span className="grid size-10 shrink-0 place-items-center rounded-[6px] bg-[#c66b4f] text-sm font-bold text-white">
+                        {String(index + 1).padStart(2, "0")}
+                      </span>
+                      <h3 className="text-base font-semibold">{step.title}</h3>
+                    </div>
+                    <p className="mt-4 text-sm leading-7 text-[#5f5a4f] dark:text-[#d3cab8]">{step.description}</p>
+                  </article>
                 ))}
               </div>
             </div>
           </div>
         </section>
 
-        <section className="border-b border-zinc-200 bg-zinc-50 py-20 dark:border-white/10 dark:bg-white/[0.03]">
-          <div className="mx-auto grid w-full max-w-7xl gap-10 px-4 sm:px-6 lg:grid-cols-[0.75fr_1.25fr] lg:px-8">
-            <div>
-              <p className="text-sm font-semibold uppercase text-sky-600 dark:text-sky-300">Process</p>
-              <h2 className="mt-3 text-3xl font-semibold tracking-normal">{t.processTitle}</h2>
-              <p className="mt-4 text-base leading-8 text-zinc-600 dark:text-zinc-300">{t.processIntro}</p>
-            </div>
-            <div className="grid gap-4 sm:grid-cols-2">
-              {t.processSteps.map((step, index) => (
-                <article
-                  key={step.title}
-                  className="animate-fade-up rounded-lg border border-zinc-200 bg-white p-5 hover:-translate-y-1 hover:shadow-lg hover:shadow-zinc-200/70 dark:border-white/10 dark:bg-zinc-950 dark:hover:shadow-black/20"
-                >
-                  <div className="flex items-center gap-3">
-                    <span className="grid size-9 place-items-center rounded-md bg-sky-600 text-sm font-semibold text-white">
-                      {String(index + 1).padStart(2, "0")}
-                    </span>
-                    <h3 className="text-base font-semibold">{step.title}</h3>
-                  </div>
-                  <p className="mt-4 text-sm leading-7 text-zinc-600 dark:text-zinc-300">{step.description}</p>
-                </article>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section id="contact" className="mx-auto grid w-full max-w-7xl gap-10 px-4 py-20 sm:px-6 lg:grid-cols-[0.9fr_1.1fr] lg:px-8">
+        <section id="contact" className="mx-auto grid w-full max-w-7xl gap-10 px-4 py-18 pb-28 sm:px-6 md:pb-18 lg:grid-cols-[0.9fr_1.1fr] lg:px-8">
           <div>
-            <p className="text-sm font-semibold uppercase text-sky-600 dark:text-sky-300">Contact</p>
-            <h2 className="mt-3 text-3xl font-semibold tracking-normal">{t.contactTitle}</h2>
-            <p className="mt-4 text-base leading-8 text-zinc-600 dark:text-zinc-300">{t.contactDescription}</p>
-            <div className="mt-8 space-y-3">
-              <a href={`mailto:${profile.email}`} className="flex items-center gap-3 text-sm font-medium text-zinc-700 hover:text-sky-600 dark:text-zinc-200">
-                <Mail className="size-5 text-sky-500" />
-                {profile.email}
-              </a>
-              <a href={`tel:${profile.phone}`} className="flex items-center gap-3 text-sm font-medium text-zinc-700 hover:text-sky-600 dark:text-zinc-200">
-                <Phone className="size-5 text-sky-500" />
-                {profile.phone}
-              </a>
+            <SectionKicker label="Contact" />
+            <h2 className="mt-5 max-w-2xl text-3xl font-semibold tracking-normal sm:text-5xl">{t.contactTitle}</h2>
+            <p className="mt-5 max-w-2xl text-base leading-8 text-[#5f5a4f] dark:text-[#d3cab8]">
+              {t.contactDescription}
+            </p>
+
+            <div className="mt-8 grid gap-3">
+              <ContactLink href={`mailto:${profile.email}`} icon={Mail} label={profile.email} />
+              <ContactLink href={`tel:${profile.phone}`} icon={Phone} label={profile.phone} />
               {profile.githubs.map((github) => (
-                <a key={github} href={github} target="_blank" rel="noreferrer" className="flex items-center gap-3 text-sm font-medium text-zinc-700 hover:text-sky-600 dark:text-zinc-200">
-                  <GitBranch className="size-5 text-sky-500" />
-                  {github.replace("https://github.com/", "github.com/")}
-                </a>
+                <ContactLink
+                  key={github}
+                  href={github}
+                  icon={GitBranch}
+                  label={github.replace("https://github.com/", "github.com/")}
+                  external
+                />
               ))}
-              <a href={profile.facebook} target="_blank" rel="noreferrer" className="flex items-center gap-3 text-sm font-medium text-zinc-700 hover:text-sky-600 dark:text-zinc-200">
-                <UserRound className="size-5 text-sky-500" />
-                Facebook
-              </a>
+              <ContactLink href={profile.facebook} icon={UserRound} label="Facebook" external />
             </div>
 
-            <div className="mt-8 rounded-lg border border-zinc-200 bg-zinc-50 p-5 dark:border-white/10 dark:bg-white/[0.03]">
+            <div className="mt-8 rounded-[8px] border border-[#181713]/10 bg-white/62 p-5 dark:border-white/10 dark:bg-white/[0.045]">
               <div className="flex items-start gap-3">
-                <span className="grid size-10 shrink-0 place-items-center rounded-md bg-sky-100 text-sky-700 dark:bg-sky-400/10 dark:text-sky-200">
+                <span className="grid size-10 shrink-0 place-items-center rounded-[6px] bg-[#00806f]/10 text-[#00806f] dark:bg-[#72e0cf]/10 dark:text-[#72e0cf]">
                   <BriefcaseBusiness className="size-5" />
                 </span>
                 <div>
-                  <p className="text-sm font-semibold text-sky-700 dark:text-sky-300">{t.companyTitle}</p>
+                  <p className="text-sm font-bold text-[#00806f] dark:text-[#72e0cf]">{t.companyTitle}</p>
                   <h3 className="mt-2 text-base font-semibold">{company.name}</h3>
-                  <p className="mt-1 text-sm text-zinc-500 dark:text-zinc-400">{company.internationalName}</p>
+                  <p className="mt-1 text-sm text-[#777064] dark:text-[#b8af9f]">{company.internationalName}</p>
                 </div>
               </div>
               <div className="mt-5 grid gap-3 sm:grid-cols-3">
-                <div>
-                  <p className="text-xs font-semibold uppercase text-zinc-400">{t.companyTaxCode}</p>
-                  <p className="mt-1 text-sm font-semibold">{company.taxCode}</p>
-                </div>
-                <div>
-                  <p className="text-xs font-semibold uppercase text-zinc-400">{t.companyRepresentative}</p>
-                  <p className="mt-1 text-sm font-semibold">{company.representative}</p>
-                </div>
-                <div>
-                  <p className="text-xs font-semibold uppercase text-zinc-400">Status</p>
-                  <p className="mt-1 text-sm font-semibold">{locale === "vi" ? company.status : t.companyStatus}</p>
-                </div>
+                <CompanyFact label={t.companyTaxCode} value={company.taxCode} />
+                <CompanyFact label={t.companyRepresentative} value={company.representative} />
+                <CompanyFact label="Status" value={locale === "vi" ? company.status : t.companyStatus} />
               </div>
               <a
                 href={company.url}
                 target="_blank"
                 rel="noreferrer"
-                className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-sky-700 hover:text-sky-500 dark:text-sky-300"
+                className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-[#00806f] hover:text-[#c66b4f] dark:text-[#72e0cf]"
               >
                 {t.companyLink}
                 <ExternalLink className="size-4" />
@@ -774,38 +809,23 @@ export default function Home() {
             </div>
           </div>
 
-          <form onSubmit={submitContact} className="rounded-lg border border-zinc-200 bg-zinc-50 p-5 dark:border-white/10 dark:bg-white/[0.03]">
+          <form onSubmit={submitContact} className="rounded-[8px] border border-[#181713]/10 bg-[#181713] p-5 text-white shadow-[0_32px_90px_rgba(24,23,19,0.18)] dark:border-white/10 dark:bg-[#202c39]">
             <div className="grid gap-4 sm:grid-cols-2">
-              <label className="block">
-                <span className="text-sm font-semibold">{t.formName}</span>
-                <input
-                  name="name"
-                  className="mt-2 h-12 w-full rounded-md border border-zinc-200 bg-white px-3 text-sm outline-none transition focus:border-sky-500 dark:border-white/10 dark:bg-zinc-950"
-                  required
-                />
-              </label>
-              <label className="block">
-                <span className="text-sm font-semibold">{t.formEmail}</span>
-                <input
-                  name="email"
-                  type="email"
-                  className="mt-2 h-12 w-full rounded-md border border-zinc-200 bg-white px-3 text-sm outline-none transition focus:border-sky-500 dark:border-white/10 dark:bg-zinc-950"
-                  required
-                />
-              </label>
+              <Field label={t.formName} name="name" />
+              <Field label={t.formEmail} name="email" type="email" />
             </div>
             <label className="mt-4 block">
               <span className="text-sm font-semibold">{t.formMessage}</span>
               <textarea
                 name="message"
-                rows={6}
-                className="mt-2 w-full resize-none rounded-md border border-zinc-200 bg-white px-3 py-3 text-sm outline-none transition focus:border-sky-500 dark:border-white/10 dark:bg-zinc-950"
+                rows={7}
+                className="mt-2 w-full resize-none rounded-[6px] border border-white/12 bg-white/8 px-3 py-3 text-sm text-white outline-none transition placeholder:text-white/35 focus:border-[#72e0cf]"
                 required
               />
             </label>
             <button
               type="submit"
-              className="mt-5 inline-flex h-12 w-full items-center justify-center gap-2 rounded-md bg-sky-600 px-5 text-sm font-semibold text-white transition hover:bg-sky-700 sm:w-auto"
+              className="mt-5 inline-flex h-12 w-full items-center justify-center gap-2 rounded-[6px] bg-[#72e0cf] px-5 text-sm font-bold text-[#11110f] transition hover:bg-white sm:w-auto"
             >
               <Send className="size-4" />
               {t.formButton}
@@ -813,11 +833,11 @@ export default function Home() {
           </form>
         </section>
 
-        <footer className="border-t border-zinc-200 px-4 py-8 text-center text-sm text-zinc-500 dark:border-white/10 dark:text-zinc-400">
+        <footer className="border-t border-[#181713]/10 px-4 py-8 text-center text-sm text-[#777064] dark:border-white/10 dark:text-[#b8af9f]">
           © {new Date().getFullYear()} {profile.displayName}. {t.footer}
         </footer>
 
-        <nav className="fixed inset-x-3 bottom-3 z-50 rounded-lg border border-zinc-200 bg-white/92 p-2 shadow-2xl shadow-zinc-950/15 backdrop-blur-xl dark:border-white/10 dark:bg-zinc-950/90 md:hidden">
+        <nav className="fixed inset-x-3 bottom-3 z-50 rounded-[8px] border border-[#181713]/10 bg-[#fbfaf6]/94 p-2 shadow-2xl shadow-black/15 backdrop-blur-xl dark:border-white/10 dark:bg-[#11110f]/92 md:hidden">
           <div className="grid grid-cols-5 gap-1">
             {navItems.map((item) => {
               const Icon = item.icon;
@@ -826,7 +846,7 @@ export default function Home() {
                 <a
                   key={item.href}
                   href={item.href}
-                  className="flex min-h-14 flex-col items-center justify-center gap-1 rounded-md text-[11px] font-semibold text-zinc-500 hover:bg-sky-50 hover:text-sky-700 dark:text-zinc-400 dark:hover:bg-sky-400/10 dark:hover:text-sky-200"
+                  className="flex min-h-14 flex-col items-center justify-center gap-1 rounded-[6px] text-[11px] font-semibold text-[#777064] hover:bg-[#00806f]/10 hover:text-[#00806f] dark:text-[#b8af9f] dark:hover:bg-[#72e0cf]/10 dark:hover:text-[#72e0cf]"
                 >
                   <Icon className="size-4" />
                   <span className="max-w-full truncate">{item.label}</span>
@@ -840,32 +860,58 @@ export default function Home() {
   );
 }
 
-function ProjectCover({ project }: { project: (typeof projects)[number] }) {
+function SectionKicker({ label, inverted = false }: { label: string; inverted?: boolean }) {
+  return (
+    <p className={`text-sm font-bold uppercase ${inverted ? "text-[#72e0cf]" : "text-[#00806f] dark:text-[#72e0cf]"}`}>
+      {label}
+    </p>
+  );
+}
+
+function ProjectCover({
+  project,
+  featured,
+}: {
+  project: (typeof projects)[number];
+  featured?: boolean;
+}) {
   const [missing, setMissing] = useState(false);
 
   return (
-    <div className="relative aspect-[16/9] overflow-hidden bg-zinc-100 dark:bg-white/5">
-      {!missing ? (
+    <div className={`relative overflow-hidden rounded-[6px] bg-[#e9e4da] dark:bg-white/8 ${featured ? "aspect-[16/8.4]" : "aspect-[16/10]"}`}>
+      {project.image && !missing ? (
         <Image
           src={project.image}
           alt={`${project.name} screenshot`}
           fill
-          sizes="(min-width: 1280px) 25vw, (min-width: 768px) 50vw, 100vw"
+          sizes={featured ? "(min-width: 1280px) 58vw, 100vw" : "(min-width: 1280px) 32vw, (min-width: 768px) 50vw, 100vw"}
           className="object-cover transition duration-500 group-hover:scale-105"
           onError={() => setMissing(true)}
         />
       ) : (
-        <div className={`flex h-full flex-col justify-between bg-gradient-to-br ${project.accent} p-4 text-white`}>
-          <div className="flex items-center justify-between">
-            {project.type.includes("Mobile") ? <Smartphone className="size-5" /> : <Globe2 className="size-5" />}
-            <ArrowUpRight className="size-5 transition group-hover:translate-x-1 group-hover:-translate-y-1" />
-          </div>
-          <div>
-            <p className="text-xs font-semibold uppercase text-white/80">{project.type}</p>
-            <h3 className="mt-1 text-2xl font-semibold">{project.name}</h3>
-          </div>
-        </div>
+        <ProjectFallback project={project} />
       )}
+    </div>
+  );
+}
+
+function ProjectFallback({
+  project,
+  compact = false,
+}: {
+  project: (typeof projects)[number];
+  compact?: boolean;
+}) {
+  return (
+    <div className={`flex h-full flex-col justify-between ${project.accent} p-5 text-white`}>
+      <div className="flex items-center justify-between">
+        {project.type.includes("Mobile") ? <Smartphone className={compact ? "size-4" : "size-5"} /> : <Globe2 className={compact ? "size-4" : "size-5"} />}
+        <ArrowUpRight className={`${compact ? "size-4" : "size-5"} transition group-hover:translate-x-1 group-hover:-translate-y-1`} />
+      </div>
+      <div>
+        <p className="text-xs font-bold uppercase text-white/78">{project.type}</p>
+        <h3 className={compact ? "mt-1 text-sm font-semibold" : "mt-1 text-2xl font-semibold"}>{project.name}</h3>
+      </div>
     </div>
   );
 }
@@ -885,10 +931,10 @@ function BillCard({
       <button
         type="button"
         onClick={() => !missing && setOpen(true)}
-        className="group overflow-hidden rounded-md border border-zinc-200 bg-white text-left transition hover:-translate-y-0.5 hover:border-sky-300 hover:shadow-lg hover:shadow-sky-950/10 dark:border-white/10 dark:bg-zinc-950 dark:hover:border-sky-400/40"
+        className="group overflow-hidden rounded-[6px] border border-white/10 bg-white/8 text-left transition hover:-translate-y-0.5 hover:border-[#72e0cf]/55 hover:bg-white/12"
         aria-label={`${viewLabel} ${bill.id}`}
       >
-        <div className="relative aspect-[3/4] bg-zinc-100 dark:bg-white/5">
+        <div className="relative aspect-[3/4] bg-white/8">
           {!missing ? (
             <Image
               src={bill.src}
@@ -900,13 +946,13 @@ function BillCard({
             />
           ) : (
             <div className="flex h-full flex-col items-center justify-center p-3 text-center">
-              <div className="grid size-9 place-items-center rounded-md bg-sky-100 text-sm font-semibold text-sky-700 dark:bg-sky-400/10 dark:text-sky-200">
+              <div className="grid size-9 place-items-center rounded-[6px] bg-[#72e0cf] text-sm font-bold text-[#11110f]">
                 {bill.id}
               </div>
-              <p className="mt-2 text-[11px] font-semibold">bill{bill.id}.jpg</p>
+              <p className="mt-2 text-[11px] font-semibold text-white/80">bill{bill.id}.jpg</p>
             </div>
           )}
-          <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/75 to-transparent p-2">
+          <div className="absolute inset-x-0 bottom-0 bg-[linear-gradient(to_top,rgba(0,0,0,0.76),transparent)] p-2">
             <p className="text-xs font-semibold text-white">Bill {bill.id}</p>
           </div>
         </div>
@@ -914,7 +960,7 @@ function BillCard({
 
       {open ? (
         <div
-          className="fixed inset-0 z-[80] flex items-center justify-center bg-black/80 p-4 backdrop-blur-sm"
+          className="fixed inset-0 z-[80] flex items-center justify-center bg-black/82 p-4 backdrop-blur-sm"
           role="dialog"
           aria-modal="true"
           onClick={() => setOpen(false)}
@@ -923,12 +969,12 @@ function BillCard({
             <button
               type="button"
               onClick={() => setOpen(false)}
-              className="absolute -right-2 -top-12 grid size-10 place-items-center rounded-md bg-white text-zinc-950 transition hover:bg-sky-100"
+              className="absolute -right-2 -top-12 grid size-10 place-items-center rounded-[6px] bg-white text-[#11110f] transition hover:bg-[#72e0cf]"
               aria-label="Close bill preview"
             >
               <X className="size-5" />
             </button>
-            <div className="relative mx-auto aspect-[3/4] max-h-[90vh] overflow-hidden rounded-lg bg-white">
+            <div className="relative mx-auto aspect-[3/4] max-h-[90vh] overflow-hidden rounded-[8px] bg-white">
               <Image
                 src={bill.src}
                 alt={`Bill ${bill.id}`}
@@ -941,5 +987,60 @@ function BillCard({
         </div>
       ) : null}
     </>
+  );
+}
+
+function ContactLink({
+  href,
+  icon: Icon,
+  label,
+  external = false,
+}: {
+  href: string;
+  icon: typeof Mail;
+  label: string;
+  external?: boolean;
+}) {
+  return (
+    <a
+      href={href}
+      target={external ? "_blank" : undefined}
+      rel={external ? "noreferrer" : undefined}
+      className="flex min-h-12 items-center gap-3 rounded-[6px] border border-[#181713]/10 bg-white/45 px-3 text-sm font-medium text-[#514d44] transition hover:border-[#00806f]/35 hover:text-[#00806f] dark:border-white/10 dark:bg-white/[0.045] dark:text-[#d8d0c0] dark:hover:text-[#72e0cf]"
+    >
+      <Icon className="size-5 shrink-0 text-[#00806f] dark:text-[#72e0cf]" />
+      <span className="min-w-0 truncate">{label}</span>
+    </a>
+  );
+}
+
+function CompanyFact({ label, value }: { label: string; value: string }) {
+  return (
+    <div>
+      <p className="text-xs font-bold uppercase text-[#8b6d3a] dark:text-[#d7b776]">{label}</p>
+      <p className="mt-1 text-sm font-semibold">{value}</p>
+    </div>
+  );
+}
+
+function Field({
+  label,
+  name,
+  type = "text",
+}: {
+  label: string;
+  name: string;
+  type?: string;
+}) {
+  return (
+    <label className="block">
+      <span className="text-sm font-semibold">{label}</span>
+      <input
+        name={name}
+        type={type}
+        className="mt-2 h-12 w-full rounded-[6px] border border-white/12 bg-white/8 px-3 text-sm text-white outline-none transition placeholder:text-white/35 focus:border-[#72e0cf]"
+        required
+      />
+    </label>
   );
 }

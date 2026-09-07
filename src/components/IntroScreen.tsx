@@ -10,14 +10,16 @@ type IntroScreenProps = {
 const INTRO_SESSION_KEY = "lqt-portfolio-intro-seen";
 
 export function IntroScreen({ name }: IntroScreenProps) {
-  const [visible, setVisible] = useState(() => {
-    if (typeof window === "undefined") {
-      return false;
-    }
-
-    return window.sessionStorage.getItem(INTRO_SESSION_KEY) !== "true";
-  });
+  const [visible, setVisible] = useState(false);
   const [leaving, setLeaving] = useState(false);
+
+  useEffect(() => {
+    const timer = window.setTimeout(() => {
+      setVisible(window.sessionStorage.getItem(INTRO_SESSION_KEY) !== "true");
+    }, 0);
+
+    return () => window.clearTimeout(timer);
+  }, []);
 
   useEffect(() => {
     if (!visible) {
