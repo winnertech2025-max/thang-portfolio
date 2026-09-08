@@ -1,32 +1,24 @@
 "use client";
 
-import { Reveal, Squiggle } from "./ui";
+import { useState } from "react";
+import { Magnetic, Reveal, Squiggle } from "./ui";
 import { CONTACT } from "@/data/content";
-
-const LINKS = [
-  {
-    label: "Email",
-    value: CONTACT.email,
-    href: `mailto:${CONTACT.email}`,
-  },
-  {
-    label: "Phone",
-    value: CONTACT.phoneDisplay,
-    href: `tel:${CONTACT.phone}`,
-  },
-  {
-    label: "GitHub",
-    value: "github.com/Thangdev02",
-    href: CONTACT.github,
-  },
-  {
-    label: "Facebook",
-    value: "Thang Quoc",
-    href: CONTACT.facebook,
-  },
-];
+import Signature from "./Signature";
 
 export default function Contact() {
+  const [copied, setCopied] = useState(false);
+
+  const copyEmail = async () => {
+    try {
+      await navigator.clipboard.writeText(CONTACT.email);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch {
+      // clipboard unavailable — still open mail client
+      window.location.href = `mailto:${CONTACT.email}`;
+    }
+  };
+
   return (
     <section
       id="contact"
@@ -54,25 +46,74 @@ export default function Contact() {
             </p>
 
             <div className="mt-10 grid gap-3 sm:grid-cols-2">
-              {LINKS.map((link) => (
+              {/* Email — copy on click */}
+              <button
+                type="button"
+                onClick={copyEmail}
+                data-cursor="sao chép"
+                className="group flex items-center justify-between gap-4 rounded-[3px] border border-line bg-paper-2/50 px-4 py-3.5 text-left transition-colors hover:border-accent"
+              >
+                <span className="mono text-[10px] uppercase tracking-[0.25em] text-ink-3">
+                  Email
+                </span>
+                <span className="flex items-center gap-2 text-sm font-medium text-ink group-hover:text-accent">
+                  {copied ? "✓ đã sao chép" : CONTACT.email}
+                </span>
+              </button>
+
+              <Magnetic className="block">
                 <a
-                  key={link.label}
-                  href={link.href}
-                  target={link.href.startsWith("http") ? "_blank" : undefined}
-                  rel={link.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                  className="group flex items-center justify-between gap-4 rounded-[3px] border border-line bg-paper-2/50 px-4 py-3.5 transition-colors hover:border-accent"
+                  href={`tel:${CONTACT.phone}`}
+                  data-cursor="gọi"
+                  className="group flex w-full items-center justify-between gap-4 rounded-[3px] border border-line bg-paper-2/50 px-4 py-3.5 transition-colors hover:border-accent"
                 >
                   <span className="mono text-[10px] uppercase tracking-[0.25em] text-ink-3">
-                    {link.label}
+                    Phone
                   </span>
                   <span className="flex items-center gap-2 text-sm font-medium text-ink group-hover:text-accent">
-                    {link.value}
+                    {CONTACT.phoneDisplay}
                     <span className="text-accent transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5">
                       ↗
                     </span>
                   </span>
                 </a>
-              ))}
+              </Magnetic>
+
+              <a
+                href={CONTACT.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                data-cursor="mở"
+                className="group flex items-center justify-between gap-4 rounded-[3px] border border-line bg-paper-2/50 px-4 py-3.5 transition-colors hover:border-accent"
+              >
+                <span className="mono text-[10px] uppercase tracking-[0.25em] text-ink-3">
+                  GitHub
+                </span>
+                <span className="flex items-center gap-2 text-sm font-medium text-ink group-hover:text-accent">
+                  github.com/Thangdev02
+                  <span className="text-accent transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5">
+                    ↗
+                  </span>
+                </span>
+              </a>
+
+              <a
+                href={CONTACT.facebook}
+                target="_blank"
+                rel="noopener noreferrer"
+                data-cursor="mở"
+                className="group flex items-center justify-between gap-4 rounded-[3px] border border-line bg-paper-2/50 px-4 py-3.5 transition-colors hover:border-accent"
+              >
+                <span className="mono text-[10px] uppercase tracking-[0.25em] text-ink-3">
+                  Facebook
+                </span>
+                <span className="flex items-center gap-2 text-sm font-medium text-ink group-hover:text-accent">
+                  Thang Quoc
+                  <span className="text-accent transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5">
+                    ↗
+                  </span>
+                </span>
+              </a>
             </div>
 
             {/* signature */}
@@ -83,8 +124,8 @@ export default function Contact() {
               <p className="mono mt-1 text-[11px] uppercase tracking-[0.3em] text-ink-3">
                 {CONTACT.title}
               </p>
-              <div className="hand mt-4 text-4xl text-accent">Thang ✍</div>
-              <Squiggle className="mt-1 h-3 w-32 text-line-strong" />
+              <Signature />
+              <Squiggle className="mt-3 h-3 w-32 text-line-strong" />
             </div>
           </div>
         </Reveal>

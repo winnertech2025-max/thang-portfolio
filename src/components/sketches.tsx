@@ -31,12 +31,14 @@ export function CoffeeCup({ className }: { className?: string }) {
     <svg viewBox="0 0 90 90" fill="none" className={className} aria-hidden>
       {/* steam */}
       <path
+        className="coffee-steam"
         d="M40 8 C 34 4, 40 0, 40 8"
         stroke="currentColor"
         strokeWidth="2"
         strokeLinecap="round"
       />
       <path
+        className="coffee-steam"
         d="M54 8 C 48 4, 54 0, 54 8"
         stroke="currentColor"
         strokeWidth="2"
@@ -114,6 +116,22 @@ export function StarDoodle({ className }: { className?: string }) {
         strokeWidth="2"
         strokeLinejoin="round"
       />
+    </svg>
+  );
+}
+
+/** A fountain pen pointing down-left (the nib tip is the bottom-left corner). */
+export function PenDoodle({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 36 36" fill="none" className={className} aria-hidden>
+      <path
+        d="M28 8 L12 24 L8 30"
+        stroke="currentColor"
+        strokeWidth="3"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path d="M8 30 L14 28 L11 23 Z" fill="currentColor" />
     </svg>
   );
 }

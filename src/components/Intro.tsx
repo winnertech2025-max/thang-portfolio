@@ -3,6 +3,24 @@
 import { useRef } from "react";
 import { gsap, useGSAP } from "@/lib/gsap";
 import { ScribbleCircle } from "./ui";
+import { scrollToId } from "@/lib/lenis";
+import SecretCoupon from "./SecretCoupon";
+
+const NAME_1 = ["L", "Ê"];
+const NAME_2 = ["Q", "U", "Ố", "C"];
+const NAME_3 = ["T", "H", "Ắ", "N", "G"];
+
+function Word({ letters, className = "" }: { letters: string[]; className?: string }) {
+  return (
+    <span className={`inline-flex ${className}`}>
+      {letters.map((l, i) => (
+        <span key={i} className="intro-letter">
+          {l}
+        </span>
+      ))}
+    </span>
+  );
+}
 
 export default function Intro() {
   const root = useRef<HTMLElement>(null);
@@ -123,6 +141,9 @@ export default function Intro() {
             aria-hidden
           />
 
+          {/* the hidden coupon — random position, folded into the paper */}
+          <SecretCoupon />
+
           {/* content */}
           <div className="relative text-center">
             <p className="intro-kicker mono flex items-center justify-center gap-4 text-[11px] uppercase tracking-[0.5em] text-ink-3">
@@ -131,13 +152,17 @@ export default function Intro() {
               <span className="h-px w-8 bg-line-strong" aria-hidden />
             </p>
 
-            <h1 className="intro-name font-display mt-7 text-[13.2vw] font-semibold leading-[0.9] tracking-tight text-ink sm:text-8xl lg:text-[9rem]">
+            <h1 className="intro-name font-display mt-7 text-[2.7rem] font-semibold leading-[0.9] tracking-tight text-ink sm:text-8xl lg:text-[9rem]">
               <span className="block overflow-hidden pb-[0.06em]">
-                <span className="intro-name-line block">LÊ QUỐC</span>
+                <span className="intro-name-line block">
+                  <Word letters={NAME_1} /> <Word letters={NAME_2} />
+                </span>
               </span>
               <span className="block overflow-hidden pb-[0.06em]">
                 <span className="intro-name-line block">
-                  <span className="text-stroke">THẮNG</span>
+                  <span className="text-stroke">
+                    <Word letters={NAME_3} />
+                  </span>
                 </span>
               </span>
             </h1>
@@ -192,10 +217,15 @@ export default function Intro() {
           </svg>
 
           {/* scroll hint */}
-          <div className="intro-scroll absolute bottom-6 left-1/2 -translate-x-1/2 text-center">
-            <p className="mono text-[10px] uppercase tracking-[0.4em] text-ink-3">
+          <button
+            type="button"
+            onClick={() => scrollToId("#chapter-beginning")}
+            data-cursor="bắt đầu"
+            className="intro-scroll absolute bottom-6 left-1/2 -translate-x-1/2 text-center"
+          >
+            <span className="mono block text-[10px] uppercase tracking-[0.4em] text-ink-3">
               Scroll to begin
-            </p>
+            </span>
             <svg
               viewBox="0 0 24 24"
               className="mx-auto mt-2 h-5 w-5 animate-bounce text-accent"
@@ -210,7 +240,7 @@ export default function Intro() {
                 strokeLinejoin="round"
               />
             </svg>
-          </div>
+          </button>
         </div>
       </div>
     </section>

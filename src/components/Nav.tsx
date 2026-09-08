@@ -67,10 +67,11 @@ export default function Nav() {
       <button
         type="button"
         onClick={() => scrollToId("#top")}
+        data-cursor="lên đầu"
         className="fixed left-5 top-5 z-50 flex items-center gap-3 sm:left-8 sm:top-7"
         aria-label="Lê Quốc Thắng — back to top"
       >
-        <span className="font-display flex h-10 w-10 items-center justify-center rounded-full border border-ink/30 bg-paper text-sm font-semibold tracking-tight text-ink">
+        <span className="font-display flex h-10 w-10 items-center justify-center rounded-full border border-ink/30 bg-paper text-sm font-semibold tracking-tight text-ink transition-transform duration-300 hover:-rotate-6 hover:scale-110">
           LT
         </span>
         <span className="mono hidden text-[11px] uppercase tracking-[0.25em] text-ink-3 sm:block">

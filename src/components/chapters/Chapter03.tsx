@@ -1,8 +1,8 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { gsap, useGSAP } from "@/lib/gsap";
-import { ChapterHeading } from "../ui";
+import { ChapterHeading, ScribbleCircle } from "../ui";
 import { STACK } from "@/data/content";
 
 const GROUP_NOTES: Record<string, string> = {
@@ -13,6 +13,7 @@ const GROUP_NOTES: Record<string, string> = {
 
 export default function Chapter03() {
   const root = useRef<HTMLElement>(null);
+  const [selected, setSelected] = useState<string | null>(null);
 
   useGSAP(
     () => {
@@ -74,6 +75,9 @@ export default function Chapter03() {
             </span>
           }
         />
+        <p className="hand mt-3 text-xl text-ink-3">
+          bấm vào một công cụ để khoanh tròn nó ✍
+        </p>
 
         <div className="ch3-diagram relative mt-16 pl-8 sm:mt-24 sm:pl-12">
           {/* spine */}
@@ -119,17 +123,33 @@ export default function Chapter03() {
                 </div>
 
                 <div className="flex flex-wrap gap-2.5 sm:gap-3">
-                  {group.items.map((item, i) => (
-                    <span
-                      key={item}
-                      className="ch3-tag inline-flex items-center rounded-[3px] border border-line-strong/70 bg-[#fdfbf5] px-3.5 py-2 text-sm font-medium text-ink-2 shadow-[0_2px_0_rgba(28,25,23,0.06)] sm:text-base"
-                      style={{
-                        transform: `rotate(${((i % 3) - 1) * 1.3}deg)`,
-                      }}
-                    >
-                      {item}
-                    </span>
-                  ))}
+                  {group.items.map((item, i) => {
+                    const active = selected === item;
+                    return (
+                      <button
+                        key={item}
+                        type="button"
+                        data-cursor="khoanh tròn"
+                        onClick={() => setSelected(active ? null : item)}
+                        aria-pressed={active}
+                        className={`ch3-tag relative inline-flex items-center rounded-[3px] border px-3.5 py-2 text-sm font-medium shadow-[0_2px_0_rgba(28,25,23,0.06)] transition-colors sm:text-base ${
+                          active
+                            ? "border-accent bg-[#fdfbf5] text-ink"
+                            : "border-line-strong/70 bg-[#fdfbf5] text-ink-2"
+                        }`}
+                        style={{
+                          transform: `rotate(${((i % 3) - 1) * 1.3}deg)`,
+                        }}
+                      >
+                        {item}
+                        {active && (
+                          <span className="tag-ring pointer-events-none absolute -inset-2.5 text-accent">
+                            <ScribbleCircle className="h-full w-full" />
+                          </span>
+                        )}
+                      </button>
+                    );
+                  })}
                 </div>
               </div>
             ))}

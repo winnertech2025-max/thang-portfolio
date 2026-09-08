@@ -1,6 +1,7 @@
 "use client";
 
 import SmoothScroll from "./SmoothScroll";
+import Cursor from "./Cursor";
 import Nav from "./Nav";
 import Intro from "./Intro";
 import Chapter01 from "./chapters/Chapter01";
@@ -15,6 +16,7 @@ export default function Experience() {
   return (
     <SmoothScroll>
       <div className="grain" aria-hidden />
+      <Cursor />
       <Nav />
       <main>
         <Intro />

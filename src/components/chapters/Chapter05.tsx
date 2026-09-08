@@ -1,12 +1,13 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { gsap, useGSAP } from "@/lib/gsap";
-import { ChapterHeading } from "../ui";
+import { ChapterHeading, ScribbleCircle } from "../ui";
 import { PROCESS } from "@/data/content";
 
 export default function Chapter05() {
   const root = useRef<HTMLElement>(null);
+  const [active, setActive] = useState<number | null>(null);
 
   useGSAP(
     () => {
@@ -70,6 +71,9 @@ export default function Chapter05() {
             </span>
           }
         />
+        <p className="hand mt-3 text-xl text-ink-3">
+          bấm vào từng bước để đánh dấu ✍
+        </p>
 
         <div className="ch5-blueprint relative mt-16 rounded-[3px] border border-line-strong/70 bg-paper-2/40 p-6 sm:mt-24 sm:p-12 lg:p-14">
           {/* blueprint corner marks */}
@@ -87,12 +91,34 @@ export default function Chapter05() {
             />
 
             <div className="space-y-12 sm:space-y-14">
-              {PROCESS.map((step) => (
-                <div key={step.num} className="ch5-step relative">
+              {PROCESS.map((step, i) => (
+                <div
+                  key={step.num}
+                  role="button"
+                  tabIndex={0}
+                  data-cursor={active === i ? "bỏ đánh dấu" : "đánh dấu"}
+                  onClick={() => setActive(active === i ? null : i)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                      e.preventDefault();
+                      setActive(active === i ? null : i);
+                    }
+                  }}
+                  className={`ch5-step process-step relative cursor-pointer p-2 -m-2 sm:p-3 sm:-m-3 ${
+                    active === i ? "active" : ""
+                  }`}
+                >
                   <span
-                    className="ch5-dot absolute -left-[33px] top-1.5 h-[15px] w-[15px] rounded-full border-2 border-accent bg-paper sm:-left-[36px]"
+                    className={`ch5-dot absolute -left-[33px] top-[1.15rem] h-[15px] w-[15px] rounded-full border-2 border-accent bg-paper sm:-left-[36px] ${
+                      active === i ? "scale-110 bg-accent" : ""
+                    }`}
                     aria-hidden
                   />
+                  {active === i && (
+                    <span className="tag-ring pointer-events-none absolute -left-[43px] top-3 h-9 w-9 text-accent sm:-left-[46px]">
+                      <ScribbleCircle className="h-full w-full" />
+                    </span>
+                  )}
                   <div className="flex flex-wrap items-baseline gap-x-4 gap-y-1">
                     <span className="mono text-sm font-semibold text-accent">
                       {step.num}

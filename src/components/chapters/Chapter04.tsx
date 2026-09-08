@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import Image from "next/image";
 import { gsap, useGSAP } from "@/lib/gsap";
 import { ChapterHeading, Reveal } from "../ui";
@@ -10,10 +10,14 @@ function ProjectFrame({
   project,
   index,
   priority = false,
+  revealed,
+  onToggle,
 }: {
   project: Project;
   index: number;
   priority?: boolean;
+  revealed: boolean;
+  onToggle: () => void;
 }) {
   return (
     <div className="group relative">
@@ -21,7 +25,14 @@ function ProjectFrame({
         Project {String(index + 1).padStart(2, "0")}
       </span>
 
-      <div className="relative aspect-[16/10] overflow-hidden rounded-[3px] border border-line bg-paper-2">
+      <button
+        type="button"
+        onClick={onToggle}
+        data-cursor={revealed ? "bỏ màu" : "tô màu"}
+        aria-pressed={revealed}
+        aria-label={`${revealed ? "Ẩn" : "Hiện"} màu của ${project.name}`}
+        className="relative block aspect-[16/10] w-full overflow-hidden rounded-[3px] border border-line bg-paper-2 text-left"
+      >
         {project.image ? (
           <Image
             src={project.image}
@@ -29,7 +40,9 @@ function ProjectFrame({
             fill
             sizes="(min-width: 1024px) 60vw, 100vw"
             priority={priority}
-            className={`transition-[filter] duration-500 group-hover:[filter:none] [filter:grayscale(1)_sepia(0.15)_contrast(1.04)_brightness(0.99)] ${
+            className={`sketch-img transition-[filter] duration-500 ${
+              revealed ? "revealed" : ""
+            } ${
               project.portrait
                 ? "object-contain object-center p-3"
                 : "object-cover object-top"
@@ -50,7 +63,11 @@ function ProjectFrame({
           }}
           aria-hidden
         />
-      </div>
+      </button>
+
+      <p className="hand mt-2 text-sm text-ink-3">
+        {revealed ? "✓ đã tô màu — lưu vào kho" : "bấm ảnh để tô màu 🎨"}
+      </p>
     </div>
   );
 }
@@ -79,6 +96,7 @@ function ProjectInfo({ project }: { project: Project }) {
         href={project.url}
         target="_blank"
         rel="noopener noreferrer"
+        data-cursor="mở"
         className="group/link mt-6 inline-flex items-center gap-2 border-b-2 border-accent pb-0.5 text-sm font-semibold text-ink transition-colors hover:text-accent"
       >
         Ghé thăm website
@@ -93,6 +111,10 @@ function ProjectInfo({ project }: { project: Project }) {
 export default function Chapter04() {
   const root = useRef<HTMLElement>(null);
   const progressRef = useRef<HTMLSpanElement>(null);
+  const [revealed, setRevealed] = useState<Record<string, boolean>>({});
+
+  const toggle = (id: string) =>
+    setRevealed((r) => ({ ...r, [id]: !r[id] }));
 
   useGSAP(
     () => {
@@ -199,7 +221,13 @@ export default function Chapter04() {
               className="ch4-slide absolute inset-0 flex items-center justify-center px-6 sm:px-12"
             >
               <div className="grid w-full max-w-6xl items-center gap-10 lg:grid-cols-[1.25fr_1fr]">
-                <ProjectFrame project={p} index={i} priority={i === 0} />
+                <ProjectFrame
+                  project={p}
+                  index={i}
+                  priority={i === 0}
+                  revealed={!!revealed[p.id]}
+                  onToggle={() => toggle(p.id)}
+                />
                 <ProjectInfo project={p} />
               </div>
             </div>
@@ -224,7 +252,13 @@ export default function Chapter04() {
           {PROJECTS.map((p, i) => (
             <Reveal key={p.id}>
               <div className="space-y-5">
-                <ProjectFrame project={p} index={i} priority={i < 2} />
+                <ProjectFrame
+                  project={p}
+                  index={i}
+                  priority={i < 2}
+                  revealed={!!revealed[p.id]}
+                  onToggle={() => toggle(p.id)}
+                />
                 <ProjectInfo project={p} />
               </div>
             </Reveal>

@@ -150,35 +150,35 @@ export default function Chapter01() {
             </div>
 
             <div className="relative rotate-[1deg] rounded-[3px] border border-line bg-[#fdfbf5] p-7 shadow-[0_30px_60px_-35px_rgba(28,25,23,0.5)]">
-                <div className="hand absolute -top-4 left-4 bg-paper px-2 text-lg text-accent">
-                  quick stats
-                </div>
-                <dl className="space-y-7">
-                  {[
-                    { n: "4", s: "+", label: "năm kinh nghiệm" },
-                    { n: "11", s: "+", label: "dự án tiêu biểu" },
-                    { n: "2", s: "", label: "nền tảng — web + mobile" },
-                  ].map((stat) => (
-                    <div
-                      key={stat.label}
-                      className="flex items-baseline justify-between gap-4"
-                    >
-                      <div className="font-display text-5xl font-semibold text-ink">
-                        <span className="ch1-num" data-count={stat.n}>
-                          0
-                        </span>
-                        <span className="text-accent">{stat.s}</span>
-                      </div>
-                      <div className="mono text-right text-[11px] uppercase tracking-[0.18em] text-ink-3">
-                        {stat.label}
-                      </div>
+              <div className="hand absolute -top-4 left-4 bg-paper px-2 text-lg text-accent">
+                quick stats
+              </div>
+              <dl className="space-y-7">
+                {[
+                  { n: "4", s: "+", label: "năm kinh nghiệm" },
+                  { n: "11", s: "+", label: "dự án tiêu biểu" },
+                  { n: "2", s: "", label: "nền tảng — web + mobile" },
+                ].map((stat) => (
+                  <div
+                    key={stat.label}
+                    className="flex items-baseline justify-between gap-4"
+                  >
+                    <div className="font-display text-5xl font-semibold text-ink">
+                      <span className="ch1-num" data-count={stat.n}>
+                        0
+                      </span>
+                      <span className="text-accent">{stat.s}</span>
                     </div>
-                  ))}
-                </dl>
-                <Squiggle className="mt-6 h-3 w-full text-line-strong" />
-                <p className="hand mt-2 text-right text-lg text-ink-3">
-                  and counting…
-                </p>
+                    <div className="mono text-right text-[11px] uppercase tracking-[0.18em] text-ink-3">
+                      {stat.label}
+                    </div>
+                  </div>
+                ))}
+              </dl>
+              <Squiggle className="mt-6 h-3 w-full text-line-strong" />
+              <p className="hand mt-2 text-right text-lg text-ink-3">
+                and counting…
+              </p>
             </div>
           </Reveal>
         </div>

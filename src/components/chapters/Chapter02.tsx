@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import { gsap, useGSAP } from "@/lib/gsap";
 import { ChapterHeading, Reveal } from "../ui";
 import { Laptop, CoffeeCup } from "../sketches";
@@ -13,7 +13,7 @@ function CodeBlock() {
       <div className="ch2-code-line"><span className="text-accent">const</span> product = <span className="text-accent">await</span> build(idea);</div>
       <div className="ch2-code-line">product.ui = design(product);</div>
       <div className="ch2-code-line">product.api = connect(product);</div>
-      <div className="ch2-code-line">ship(product); <span className="text-ink-3">{"// -> production ✓"}</span></div>
+      <div className="ch2-code-line">ship(product); <span className="text-ink-3">{"// → production ✓"}</span></div>
       <div className="ch2-code-line"><span className="text-accent">export</span> <span className="text-accent">default</span> product;</div>
     </div>
   );
@@ -40,9 +40,23 @@ function BrowserCard() {
   );
 }
 
+const TERM_EXTRA: string[][] = [
+  ["npm run deploy", "✓ build ok — 42s"],
+  ["new message: khách gửi yêu cầu", "> đọc & tư vấn hướng làm"],
+  ["coffee refill", "☕ +1 — năng lượng đầy"],
+];
+
 function TerminalCard() {
+  const [step, setStep] = useState(0);
+  const extra = TERM_EXTRA.slice(0, step);
+
   return (
-    <div className="w-60 -rotate-[2deg] rounded-[4px] bg-ink text-paper shadow-[0_24px_50px_-28px_rgba(28,25,23,0.7)] sm:w-72">
+    <button
+      type="button"
+      onClick={() => setStep((s) => (s + 1) % (TERM_EXTRA.length + 1))}
+      data-cursor="gõ lệnh"
+      className="w-60 -rotate-[2deg] rounded-[4px] bg-ink text-left text-paper shadow-[0_24px_50px_-28px_rgba(28,25,23,0.7)] sm:w-72"
+    >
       <div className="flex items-center gap-1.5 border-b border-white/10 px-3 py-2">
         <span className="h-2 w-2 rounded-full bg-accent/80" />
         <span className="h-2 w-2 rounded-full bg-white/25" />
@@ -54,31 +68,61 @@ function TerminalCard() {
         <div className="ch2-term-line text-white/80">&gt; thắng — full-stack developer</div>
         <div className="ch2-term-line"><span className="text-accent">$</span> git push origin main</div>
         <div className="ch2-term-line text-white/80">✓ deployed to production</div>
+        {extra.map((group, gi) => (
+          <div key={gi}>
+            {group.map((line, li) => (
+              <div key={li} className="term-new">
+                {line.startsWith("$") ? (
+                  <span className="text-accent">$</span>
+                ) : null}
+                {line.replace(/^\$ /, "")}
+              </div>
+            ))}
+          </div>
+        ))}
+        <div className="text-white/40">
+          <span className="text-accent">$</span>{" "}
+          <span className="inline-block w-2 animate-pulse">▌</span>
+        </div>
       </div>
-    </div>
+    </button>
   );
 }
 
 function NoteCard({
-  text,
+  front,
+  back,
   className = "",
   color = "bg-[#f7e8b8]",
 }: {
-  text: string;
+  front: string;
+  back: string;
   className?: string;
   color?: string;
 }) {
+  const [flipped, setFlipped] = useState(false);
   return (
-    <div
-      className={`${color} ch2-note w-32 rotate-[4deg] px-3 py-3 text-center shadow-[0_12px_24px_-16px_rgba(28,25,23,0.6)] sm:w-36 ${className}`}
+    <button
+      type="button"
+      onClick={() => setFlipped((f) => !f)}
+      data-cursor="lật ghi chú"
+      className={`flip-card ch2-note w-32 ${flipped ? "flipped" : ""} ${color} rotate-[4deg] px-3 py-3 text-center shadow-[0_12px_24px_-16px_rgba(28,25,23,0.6)] sm:w-36 ${className}`}
     >
-      <p className="hand text-xl leading-tight text-ink">{text}</p>
-    </div>
+      <span className="flip-inner block min-h-[3.5rem]">
+        <span className="flip-face block min-h-[3.5rem]">
+          <span className="hand text-xl leading-tight text-ink">{front}</span>
+        </span>
+        <span className="flip-face flip-back block">
+          <span className="hand text-xl leading-tight text-ink">{back}</span>
+        </span>
+      </span>
+    </button>
   );
 }
 
 export default function Chapter02() {
   const root = useRef<HTMLElement>(null);
+  const coffeeRef = useRef<HTMLButtonElement>(null);
 
   useGSAP(
     () => {
@@ -139,6 +183,33 @@ export default function Chapter02() {
     { scope: root }
   );
 
+  const runCode = () => {
+    const lines = root.current?.querySelectorAll(".ch2-code-line");
+    if (lines?.length) {
+      gsap.fromTo(
+        lines,
+        { opacity: 0, y: 8 },
+        { opacity: 1, y: 0, stagger: 0.05, duration: 0.4, ease: "power2.out" }
+      );
+    }
+  };
+
+  const sip = () => {
+    const el = coffeeRef.current;
+    if (!el) return;
+    const steam = el.querySelectorAll(".coffee-steam");
+    gsap.fromTo(
+      steam,
+      { opacity: 0.15, scaleY: 0.4, transformOrigin: "bottom" },
+      { opacity: 0.7, scaleY: 1, stagger: 0.08, duration: 0.5, ease: "power2.out" }
+    );
+    gsap.fromTo(
+      el,
+      { rotation: -5 },
+      { rotation: 0, duration: 0.6, ease: "elastic.out(1, 0.4)" }
+    );
+  };
+
   return (
     <section ref={root} id="chapter-builder" className="relative">
       <div className="px-5 pt-24 sm:px-10 sm:pt-32 lg:px-16">
@@ -160,9 +231,24 @@ export default function Chapter02() {
         {/* Desktop pinned stage */}
         <div className="ch2-stage ch2-desktop-stage relative hidden h-screen overflow-hidden md:block">
           <div className="dot-paper absolute inset-0" aria-hidden />
+          <p className="hand pointer-events-none absolute left-1/2 top-6 -translate-x-1/2 text-xl text-ink-3">
+            psst… thử bấm mọi thứ ✨
+          </p>
           <div className="relative mx-auto h-full max-w-6xl px-6">
             {/* laptop */}
-            <div className="ch2-laptop absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+            <div
+              className="ch2-laptop absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
+              data-cursor="chạy code"
+              role="button"
+              tabIndex={0}
+              onClick={runCode}
+              onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") {
+                  e.preventDefault();
+                  runCode();
+                }
+              }}
+            >
               <div className="relative">
                 <Laptop className="w-[340px] text-ink sm:w-[420px]" />
                 <div className="absolute left-[15%] top-[16%] w-[70%]">
@@ -182,20 +268,42 @@ export default function Chapter02() {
             </div>
 
             {/* coffee */}
-            <div className="ch2-laptop absolute bottom-10 right-14 hidden lg:block">
+            <button
+              type="button"
+              ref={coffeeRef}
+              onClick={sip}
+              data-cursor="nhấp cà phê"
+              className="absolute bottom-10 right-14 hidden lg:block"
+            >
               <CoffeeCup className="w-16 text-ink-2" />
-            </div>
+            </button>
 
             {/* sticky notes */}
-            <NoteCard text="coffee first ☕" className="absolute left-24 top-24" color="bg-[#f7e8b8]" />
-            <NoteCard text="ship it 🚀" className="absolute right-28 top-[58%]" color="bg-[#dbecc9]" />
+            <NoteCard
+              front="coffee first ☕"
+              back="powered by caffeine"
+              className="absolute left-24 top-24"
+              color="bg-[#f7e8b8]"
+            />
+            <NoteCard
+              front="ship it 🚀"
+              back="done is better than perfect"
+              className="absolute right-28 top-[58%]"
+              color="bg-[#dbecc9]"
+            />
           </div>
         </div>
 
         {/* Mobile stacked scene */}
         <div className="ch2-mobile-stage mx-auto grid max-w-md gap-8 px-5 md:hidden">
           <Reveal>
-            <div className="relative mx-auto">
+            <div
+              className="relative mx-auto"
+              role="button"
+              tabIndex={0}
+              onClick={runCode}
+              data-cursor="chạy code"
+            >
               <Laptop className="w-full text-ink" />
               <div className="absolute left-[15%] top-[14%] w-[70%]">
                 <CodeBlock />
@@ -211,8 +319,18 @@ export default function Chapter02() {
             </Reveal>
           </div>
           <Reveal className="flex justify-center gap-3">
-            <NoteCard text="coffee first ☕" color="bg-[#f7e8b8]" className="rotate-[-2deg]" />
-            <NoteCard text="ship it 🚀" color="bg-[#dbecc9]" className="rotate-[2deg]" />
+            <NoteCard
+              front="coffee first ☕"
+              back="powered by caffeine"
+              className="rotate-[-2deg]"
+              color="bg-[#f7e8b8]"
+            />
+            <NoteCard
+              front="ship it 🚀"
+              back="done is better than perfect"
+              className="rotate-[2deg]"
+              color="bg-[#dbecc9]"
+            />
           </Reveal>
         </div>
       </div>

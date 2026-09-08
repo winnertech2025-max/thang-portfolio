@@ -2,7 +2,7 @@
 
 import { useRef } from "react";
 import { gsap, useGSAP } from "@/lib/gsap";
-import { Reveal, Squiggle } from "../ui";
+import { Magnetic, Reveal, Squiggle } from "../ui";
 import { scrollToId } from "@/lib/lenis";
 
 export default function Chapter06() {
@@ -78,16 +78,19 @@ export default function Chapter06() {
         </Reveal>
 
         <Reveal className="mt-14" y={20}>
-          <button
-            type="button"
-            onClick={() => scrollToId("#contact")}
-            className="group inline-flex items-center gap-4 rounded-[3px] bg-paper px-7 py-4 text-base font-semibold text-ink transition-colors hover:bg-[#e07652] hover:text-paper"
-          >
-            Cùng xây gì đó
-            <span className="font-display text-xl transition-transform group-hover:translate-x-1">
-              →
-            </span>
-          </button>
+          <Magnetic>
+            <button
+              type="button"
+              onClick={() => scrollToId("#contact")}
+              data-cursor="let's go"
+              className="group inline-flex items-center gap-4 rounded-[3px] bg-paper px-7 py-4 text-base font-semibold text-ink transition-colors hover:bg-[#e07652] hover:text-paper"
+            >
+              Cùng xây gì đó
+              <span className="font-display text-xl transition-transform group-hover:translate-x-1">
+                →
+              </span>
+            </button>
+          </Magnetic>
         </Reveal>
 
         <Reveal className="mt-20" y={16}>
