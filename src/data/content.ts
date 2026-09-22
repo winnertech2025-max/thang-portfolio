@@ -12,6 +12,26 @@ export type Project = {
 
 export const PROJECTS: Project[] = [
   {
+    id: "quang-thang-telecom",
+    name: "Viễn Thông Quang Thắng",
+    category: "Telecom ecommerce",
+    description:
+      "Website thương mại điện tử cho thiết bị viễn thông, camera và hạ tầng mạng với danh mục sản phẩm chuyên sâu.",
+    stack: ["Next.js", "Ecommerce", "Product Catalogue"],
+    url: "https://vienthongquangthang.com/",
+    image: "/projects/quang-thang-telecom.png",
+  },
+  {
+    id: "mystere-shop",
+    name: "Mystère Shop",
+    category: "Brand experience",
+    description:
+      "Website thương hiệu mang tinh thần Việt Nam đương đại, kết hợp storytelling và trải nghiệm editorial giàu chuyển động.",
+    stack: ["React", "Motion", "Editorial UI"],
+    url: "https://finall-mystery-2026.vercel.app/",
+    image: "/projects/mystere-shop.png",
+  },
+  {
     id: "lam-media",
     name: "Lam Media",
     category: "Sports platform",
