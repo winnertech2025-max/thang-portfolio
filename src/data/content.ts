@@ -6,11 +6,49 @@ export type Project = {
   stack: string[];
   url: string;
   image: string;
+  year?: string;
+  featured?: boolean;
   /** Portrait screenshots (mobile apps) are laid out differently */
   portrait?: boolean;
 };
 
 export const PROJECTS: Project[] = [
+  {
+    id: "mh-studio",
+    name: "MH Studio",
+    category: "Real estate imaging",
+    description:
+      "Website dịch vụ chỉnh sửa ảnh bất động sản và virtual staging, hướng tới khách hàng quốc tế với trải nghiệm giàu hình ảnh.",
+    stack: ["Web Design", "Service UX", "Responsive UI"],
+    url: "https://www.mhstudiore.com/reference/index.html",
+    image: "/projects/mh-studio.jpg",
+    year: "2026",
+    featured: true,
+  },
+  {
+    id: "huy-hoang-melamine",
+    name: "Huy Hoàng Melamine",
+    category: "Material catalogue",
+    description:
+      "Website tra cứu vật liệu gỗ công nghiệp, mã màu và quy cách sản phẩm, kết hợp luồng tư vấn và nhận báo giá.",
+    stack: ["Next.js", "Product Catalogue", "Business UX"],
+    url: "https://www.huyhoangmelamine.com/",
+    image: "/projects/huy-hoang-melamine.jpg",
+    year: "2026",
+    featured: true,
+  },
+  {
+    id: "tram-photo",
+    name: "Trạm Rửa Ảnh",
+    category: "Photo studio commerce",
+    description:
+      "Website rửa ảnh và quà tặng tại Rạch Giá, mang trải nghiệm cảm xúc cho album, photobook, khung ảnh và ảnh in cao cấp.",
+    stack: ["Brand Experience", "Ecommerce", "Responsive UI"],
+    url: "https://premium-photo-studio-website.vercel.app/",
+    image: "/projects/tram-photo.jpg",
+    year: "2026",
+    featured: true,
+  },
   {
     id: "quang-thang-telecom",
     name: "Viễn Thông Quang Thắng",
@@ -20,6 +58,7 @@ export const PROJECTS: Project[] = [
     stack: ["Next.js", "Ecommerce", "Product Catalogue"],
     url: "https://vienthongquangthang.com/",
     image: "/projects/quang-thang-telecom.png",
+    year: "2026",
   },
   {
     id: "mystere-shop",
@@ -28,8 +67,9 @@ export const PROJECTS: Project[] = [
     description:
       "Website thương hiệu mang tinh thần Việt Nam đương đại, kết hợp storytelling và trải nghiệm editorial giàu chuyển động.",
     stack: ["React", "Motion", "Editorial UI"],
-    url: "https://finall-mystery-2026.vercel.app/",
-    image: "/projects/mystere-shop.png",
+    url: "https://www.mystereshop.com/",
+    image: "/projects/mystere-shop.jpg",
+    year: "2026",
   },
   {
     id: "lam-media",

@@ -20,53 +20,70 @@ function ProjectFrame({
   onToggle: () => void;
 }) {
   return (
-    <div className="group relative">
-      <span className="mono absolute -top-3 left-0 z-10 bg-paper pr-3 text-[10px] uppercase tracking-[0.3em] text-ink-3">
-        Project {String(index + 1).padStart(2, "0")}
-      </span>
+    <div className="group relative min-w-0">
+      <div className="mb-3 flex items-center justify-between gap-4">
+        <span className="mono text-[10px] uppercase tracking-[0.3em] text-ink-3">
+          Project {String(index + 1).padStart(2, "0")}
+        </span>
+        <div className="flex items-center gap-3">
+          {project.featured ? (
+            <span className="mono border-b border-accent text-[9px] uppercase tracking-[0.22em] text-accent">
+              New work
+            </span>
+          ) : null}
+          <span className="mono flex items-center gap-1.5 text-[9px] uppercase tracking-[0.2em] text-ink-3">
+            <span className="h-1.5 w-1.5 rounded-full bg-[#3f8f61]" /> Live
+          </span>
+        </div>
+      </div>
 
-      <button
-        type="button"
-        onClick={onToggle}
-        data-cursor={revealed ? "bỏ màu" : "tô màu"}
-        aria-pressed={revealed}
-        aria-label={`${revealed ? "Ẩn" : "Hiện"} màu của ${project.name}`}
-        className="relative block aspect-[16/10] w-full overflow-hidden rounded-[3px] border border-line bg-paper-2 text-left"
-      >
-        {project.image ? (
-          <Image
-            src={project.image}
-            alt={`${project.name} — ${project.category}`}
-            fill
-            sizes="(min-width: 1024px) 60vw, 100vw"
-            priority={priority}
-            className={`sketch-img transition-[filter] duration-500 ${
-              revealed ? "revealed" : ""
-            } ${
-              project.portrait
-                ? "object-contain object-center p-3"
-                : "object-cover object-top"
-            }`}
-          />
-        ) : (
-          <div className="flex h-full flex-col items-center justify-center gap-3 p-6 text-center">
-            <span className="font-display text-4xl text-ink-3">✎</span>
-            <p className="hand text-xl text-ink-3">screenshot coming soon</p>
+      <div className="min-w-0 overflow-hidden rounded-[4px] border border-line-strong/60 bg-paper-2 shadow-[0_18px_50px_rgba(35,30,24,0.09)]">
+        <div className="flex h-8 items-center gap-1.5 border-b border-line bg-paper px-3" aria-hidden>
+          <span className="h-1.5 w-1.5 rounded-full bg-accent/70" />
+          <span className="h-1.5 w-1.5 rounded-full bg-[#c7a25b]/70" />
+          <span className="h-1.5 w-1.5 rounded-full bg-[#3f8f61]/70" />
+          <span className="mono ml-2 min-w-0 truncate text-[8px] uppercase tracking-[0.18em] text-ink-3">
+            {project.url.replace(/^https?:\/\/(www\.)?/, "").replace(/\/$/, "")}
+          </span>
+        </div>
+        <button
+          type="button"
+          onClick={onToggle}
+          data-cursor={revealed ? "phác thảo" : "xem màu"}
+          aria-pressed={revealed}
+          aria-label={`${revealed ? "Hiện bản phác thảo" : "Hiện đầy đủ màu"} của ${project.name}`}
+          className="relative block aspect-[16/10] w-full overflow-hidden bg-paper-2 text-left"
+        >
+          {project.image ? (
+            <Image
+              src={project.image}
+              alt={`${project.name} — ${project.category}`}
+              fill
+              sizes="(min-width: 1024px) 60vw, 100vw"
+              priority={priority}
+              className={`transition-[filter,transform] duration-700 group-hover:scale-[1.015] ${
+                revealed ? "sketch-img" : ""
+              } ${
+                project.portrait
+                  ? "object-contain object-center p-3"
+                  : "object-cover object-top"
+              }`}
+            />
+          ) : (
+            <div className="flex h-full flex-col items-center justify-center gap-3 p-6 text-center">
+              <span className="font-display text-4xl text-ink-3">✎</span>
+              <p className="hand text-xl text-ink-3">screenshot coming soon</p>
+            </div>
+          )}
+          <div className="absolute inset-x-0 bottom-0 flex items-end justify-between bg-gradient-to-t from-black/55 to-transparent px-4 pb-3 pt-12 text-white opacity-0 transition-opacity duration-300 group-hover:opacity-100">
+            <span className="mono text-[9px] uppercase tracking-[0.18em]">Xem giao diện</span>
+            <span aria-hidden>↗</span>
           </div>
-        )}
-        {/* paper grain overlay */}
-        <div
-          className="pointer-events-none absolute inset-0 opacity-[0.06] mix-blend-multiply"
-          style={{
-            backgroundImage:
-              "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")",
-          }}
-          aria-hidden
-        />
-      </button>
+        </button>
+      </div>
 
       <p className="hand mt-2 text-sm text-ink-3">
-        {revealed ? "✓ đã tô màu — lưu vào kho" : "bấm ảnh để tô màu 🎨"}
+        {revealed ? "bản phác thảo — bấm để trở lại" : "bấm ảnh để xem nét phác thảo"}
       </p>
     </div>
   );
@@ -75,7 +92,14 @@ function ProjectFrame({
 function ProjectInfo({ project }: { project: Project }) {
   return (
     <div>
-      <p className="hand text-xl text-accent sm:text-2xl">{project.category}</p>
+      <div className="flex items-center gap-3">
+        <p className="hand text-xl text-accent sm:text-2xl">{project.category}</p>
+        {project.year ? (
+          <span className="mono border-l border-line-strong pl-3 text-[10px] tracking-[0.2em] text-ink-3">
+            {project.year}
+          </span>
+        ) : null}
+      </div>
       <h3 className="font-display mt-2 text-3xl font-semibold tracking-tight text-ink sm:text-4xl">
         {project.name}
       </h3>
@@ -199,12 +223,20 @@ export default function Chapter04() {
               </span>
             }
           />
-          <Reveal className="mt-6 max-w-xl" y={20}>
-            <p className="text-base text-ink-3 sm:text-lg">
-              Các dự án tiêu biểu gần nhất. Trước đó mình còn tham gia hơn 10–20
-              dự án khác — nhưng đây là những sản phẩm mình muốn kể.
-            </p>
-          </Reveal>
+          <div className="mt-6 grid gap-6 sm:grid-cols-[1fr_auto] sm:items-end">
+            <Reveal className="max-w-xl" y={20}>
+              <p className="text-base text-ink-3 sm:text-lg">
+                Những sản phẩm thật đang hoạt động — từ website thương hiệu,
+                thương mại điện tử đến nền tảng vận hành và mobile app.
+              </p>
+            </Reveal>
+            <Reveal y={16}>
+              <div className="flex items-baseline gap-2 border-b border-line-strong pb-2">
+                <span className="font-display text-4xl font-semibold text-ink">{PROJECTS.length}</span>
+                <span className="mono text-[10px] uppercase tracking-[0.22em] text-ink-3">selected projects</span>
+              </div>
+            </Reveal>
+          </div>
         </div>
       </div>
 
@@ -219,6 +251,10 @@ export default function Chapter04() {
             <div
               key={p.id}
               className="ch4-slide absolute inset-0 flex items-center justify-center px-6 sm:px-12"
+              style={{
+                opacity: i === 0 ? 1 : 0,
+                visibility: i === 0 ? "visible" : "hidden",
+              }}
             >
               <div className="grid w-full max-w-6xl items-center gap-10 lg:grid-cols-[1.25fr_1fr]">
                 <ProjectFrame
@@ -236,7 +272,7 @@ export default function Chapter04() {
           {/* progress hint */}
           <div className="pointer-events-none absolute bottom-6 left-1/2 -translate-x-1/2 text-center">
             <p className="hand text-lg text-ink-3">
-              keep scrolling — {PROJECTS.length} projects ahead
+              cuộn để khám phá — {PROJECTS.length} dự án
             </p>
             <div className="mx-auto mt-2 h-px w-40 overflow-hidden bg-line">
               <span
@@ -248,10 +284,10 @@ export default function Chapter04() {
         </div>
 
         {/* Mobile stacked gallery */}
-        <div className="ch4-mobile-stage mx-auto grid max-w-xl gap-14 px-5 md:hidden">
+        <div className="ch4-mobile-stage mx-auto grid min-w-0 max-w-xl gap-14 px-5 md:hidden">
           {PROJECTS.map((p, i) => (
-            <Reveal key={p.id}>
-              <div className="space-y-5">
+            <Reveal key={p.id} className="min-w-0">
+              <div className="min-w-0 space-y-5">
                 <ProjectFrame
                   project={p}
                   index={i}

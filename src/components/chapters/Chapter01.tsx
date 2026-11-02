@@ -156,7 +156,7 @@ export default function Chapter01() {
               <dl className="space-y-7">
                 {[
                   { n: "4", s: "+", label: "năm kinh nghiệm" },
-                  { n: "11", s: "+", label: "dự án tiêu biểu" },
+                  { n: "16", s: "+", label: "dự án tiêu biểu" },
                   { n: "2", s: "", label: "nền tảng — web + mobile" },
                 ].map((stat) => (
                   <div
